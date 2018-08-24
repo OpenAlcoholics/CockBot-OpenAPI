@@ -1,9 +1,0 @@
-CREATE TABLE public.ingredient_categories
-(
-    id integer DEFAULT nextval('ingredient_categories_id_seq'::regclass) PRIMARY KEY NOT NULL,
-    name varchar(255) NOT NULL,
-    image_link varchar(512),
-    is_accessory boolean NOT NULL,
-    is_alcoholic boolean NOT NULL
-);
-CREATE UNIQUE INDEX ingredient_categories_id_uindex ON public.ingredient_categories (id);
