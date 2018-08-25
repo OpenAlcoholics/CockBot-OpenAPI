@@ -1,0 +1,207 @@
+openapi: 3.0.1
+info:
+  title: "API"
+  version: "0.1.0"
+  license:
+    name: MIT license
+paths:
+  /version:
+    get:
+      summary: OpenCocktail version
+      description: The version of the OpenCocktail database backend
+      operationId: getVersion
+      responses:
+        200:
+          description: TODO
+          content:
+            application/json:
+              schema:
+                example: 1.0.0
+                type: string
+  /cocktail/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+    get:
+      summary: Get a cocktail by its ID
+      operationId: getCocktail
+      responses:
+        200:
+          description: The searched cocktail
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Cocktail"
+        404:
+          $ref: "#/components/responses/NotFound"
+    put:
+      summary: Update a cocktail
+      operationId: updateCocktail
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Cocktail'
+      responses:
+        200:
+          description: The updated cocktail
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cocktail'
+        404:
+          $ref: "#/components/responses/NotFound"
+  /cocktail:
+    post:
+      summary: Insert a new cocktail
+      operationId: insertCocktail
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Cocktail'
+      responses:
+        201:
+          description: The created cocktail
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cocktail'
+        422:
+          $ref: '#/components/responses/SemanticError'
+components:
+  schemas:
+    Cocktail:
+      type: object
+      required:
+        - id
+        - name
+        - description
+        - ingredients
+        - category
+        - imageLink
+        - revisionDate
+      properties:
+        id:
+          example: 42
+          type: integer
+        name:
+          example: Tequila Sunrise
+          type: string
+        description:
+          example: Resembles a beautiful sunrise
+          type: string
+        ingredients:
+          type: array
+          items:
+            oneOf:
+              - "$ref": "#/components/schemas/Ingredient"
+              - type: array
+                items:
+                  "$ref": "#/components/schemas/Ingredient"
+        category:
+          "$ref": "#/components/schemas/CocktailCategory"
+        imageLink:
+          example: https://exampleimage.link
+          type: string
+        revisionDate:
+          type: string
+          format: date
+        notes:
+          example: This is a note on a cocktail
+          type: string
+    Ingredient:
+      type: object
+      required:
+        - id
+        - name
+        - share
+        - imageLink
+        - alcoholPercentage
+        - category
+      properties:
+        id:
+          example: 123
+          type: integer
+        name:
+          example: Sierra Silver Tequila
+          type: string
+        share:
+          example: 20
+          type: integer
+          format: int32
+          minimum: 0
+          maximum: 100
+        imageLink:
+          example: https://exampleimage.link
+          type: string
+        alcoholPercentage:
+          example: 38
+          type: integer
+          format: int32
+        category:
+          "$ref": "#/components/schemas/IngredientCategory"
+        notes:
+          example: This is a note on an ingredient
+          type: string
+    CocktailCategory:
+      type: object
+      required:
+        - id
+        - name
+        - description
+        - imageLink
+      properties:
+        id:
+          example: 123
+          type: integer
+        name:
+          example: Basics
+          type: string
+        description:
+          example: Cocktails everybody knows
+          type: string
+        imageLink:
+          example: https://exampleimage.link
+          type: string
+    IngredientCategory:
+      type: object
+      required:
+        - id
+        - name
+        - alcoholic
+        - imageLink
+      properties:
+        id:
+          example: 123
+          type: integer
+        name:
+          example: Tequila
+          type: string
+        alcholic:
+          example: true
+          type: boolean
+        imageLink:
+          example: https://exampleimage.link
+          type: string
+
+  responses:
+    NotFound:
+      description: The cocktail does not exist
+      content:
+        application/json:
+          schema:
+            example: Not found
+            type: string
+    SemanticError:
+      description: The request contained semantic errors
+      content:
+        application/json:
+          schema:
+            example: Unprocessable Entity
+            type: string
