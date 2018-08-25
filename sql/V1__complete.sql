@@ -52,7 +52,6 @@ CREATE TABLE ingredients
 (
     id integer DEFAULT nextval('ingredients_id_seq'::regclass) PRIMARY KEY NOT NULL,
     name varchar(255) NOT NULL,
-    measure integer DEFAULT 0 NOT NULL,
     image_link varchar(512),
     notes varchar(1024),
     alcohol_percentage integer DEFAULT 0 NOT NULL,
@@ -65,6 +64,8 @@ CREATE TABLE drink_ingredients
 (
     drink_id integer NOT NULL,
     ingredient_id integer NOT NULL,
+    share integer NOT NUll,
+    CHECK (share >= 0 AND share <= 100),
     CONSTRAINT drink_ingredients_drinks_id_fk FOREIGN KEY (drink_id) REFERENCES drinks (id) ON DELETE CASCADE ON UPDATE CASCADE,
     CONSTRAINT drink_ingredients_ingredients_id_fk FOREIGN KEY (ingredient_id) REFERENCES ingredients (id) ON DELETE CASCADE ON UPDATE CASCADE
 );
