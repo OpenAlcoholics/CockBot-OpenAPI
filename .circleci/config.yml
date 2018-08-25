@@ -16,5 +16,8 @@ jobs:
             name: Copy sql to flyway folder
             command: mv sql/* /flyway/sql/
         - run:
+            name: Clean database (only for testing)
+            command: flyway -X clean
+        - run:
             name: Execute migration
             command: flyway -X migrate
