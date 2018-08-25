@@ -14,6 +14,14 @@ CREATE TABLE ingredient_categories
 );
 CREATE UNIQUE INDEX ingredient_categories_id_uindex ON ingredient_categories (id);
 
+CREATE TABLE glasses
+(
+    id integer DEFAULT nextval('glasses_id_seq'::regclass) PRIMARY KEY NOT NULL,
+    name varchar(255) NOT NULL,
+    image_link varchar(512)
+);
+CREATE UNIQUE INDEX glasses_id_uindex ON glasses (id);
+
 CREATE TABLE categories
 (
     id integer DEFAULT nextval('categories_id_seq'::regclass) PRIMARY KEY NOT NULL,
@@ -33,7 +41,9 @@ CREATE TABLE drinks
     revision_date date NOT NULL,
     notes text,
     category integer NOT NULL,
-    CONSTRAINT drinks_categories_id_fk FOREIGN KEY (category) REFERENCES categories (id) ON DELETE CASCADE ON UPDATE CASCADE
+    glass integer NOT NULL,
+    CONSTRAINT drinks_categories_id_fk FOREIGN KEY (category) REFERENCES categories (id) ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT drinks_glasses_id_fk FOREIGN KEY (glass) REFERENCES glasses (id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 CREATE UNIQUE INDEX drinks_id_uindex ON drinks (id);
 
@@ -57,11 +67,3 @@ CREATE TABLE drink_ingredients
     CONSTRAINT drink_ingredients_drinks_id_fk FOREIGN KEY (drink_id) REFERENCES drinks (id) ON DELETE CASCADE ON UPDATE CASCADE,
     CONSTRAINT drink_ingredients_ingredients_id_fk FOREIGN KEY (ingredient_id) REFERENCES ingredients (id) ON DELETE CASCADE ON UPDATE CASCADE
 );
-
-CREATE TABLE glasses
-(
-    id integer DEFAULT nextval('glasses_id_seq'::regclass) PRIMARY KEY NOT NULL,
-    name varchar(255) NOT NULL,
-    image_link varchar(512)
-);
-CREATE UNIQUE INDEX glasses_id_uindex ON glasses (id);
