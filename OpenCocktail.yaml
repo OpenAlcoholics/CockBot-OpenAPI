@@ -319,6 +319,80 @@ paths:
         404:
           $ref: "#/components/responses/NotFound"
 
+  /glass:
+    post:
+      summary: Insert a new glass
+      operationId: insertGlass
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Glass'
+      responses:
+        201:
+          description: The created glass
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Glass'
+    get:
+      summary: Search for a glass
+      operationId: searchGlass
+      parameters:
+        - name: q
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: A list of matching glasses
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Glass'
+  /glass/{id}:
+    parameters:
+      - name: id
+        description: The ID of a glass
+        in: path
+        required: true
+        schema:
+          type: string
+    get:
+      summary: Get a glass by its ID
+      operationId: getGlass
+      responses:
+        200:
+          description: The requested glass
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Glass"
+        404:
+          $ref: "#/components/responses/NotFound"
+    put:
+      summary: Update a glass
+      operationId: updateGlass
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Glass'
+      responses:
+        200:
+          description: The updated glass
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Glass'
+        404:
+          $ref: "#/components/responses/NotFound"
+
 components:
   schemas:
     Cocktail:
@@ -329,6 +403,7 @@ components:
         - description
         - ingredients
         - category
+        - glass
         - imageLink
         - revisionDate
       properties:
@@ -345,12 +420,14 @@ components:
           type: array
           items:
             oneOf:
-              - "$ref": "#/components/schemas/Ingredient"
+              - $ref: "#/components/schemas/Ingredient"
               - type: array
                 items:
-                  "$ref": "#/components/schemas/Ingredient"
+                  $ref: "#/components/schemas/Ingredient"
         category:
-          "$ref": "#/components/schemas/CocktailCategory"
+          $ref: "#/components/schemas/CocktailCategory"
+        glass:
+          $ref: "#/components/schemas/Glass"
         imageLink:
           example: https://exampleimage.link
           type: string
@@ -431,6 +508,28 @@ components:
         alcholic:
           example: true
           type: boolean
+        imageLink:
+          example: https://exampleimage.link
+          type: string
+    Glass:
+      type: object
+      required:
+        - id
+        - name
+        - estimatedSize
+        - imageLink
+      properties:
+        id:
+          example: 123
+          type: integer
+        name:
+          example: Collins glass
+          type: string
+        estimatedSize:
+          example: 400
+          description: Typical glass size in milliliters
+          type: integer
+          format: int32
         imageLink:
           example: https://exampleimage.link
           type: string
