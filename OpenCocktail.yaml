@@ -4,23 +4,64 @@ info:
   version: "0.1.0"
   license:
     name: MIT license
+security:
+  - name:
+    - auth
 paths:
   /version:
     get:
       summary: OpenCocktail version
       description: The version of the OpenCocktail database backend
       operationId: getVersion
+      security: []
       responses:
         200:
-          description: TODO
+          description: The plain semantic version number as a string
           content:
             application/json:
               schema:
                 example: 1.0.0
                 type: string
+
+  /cocktail:
+    post:
+      summary: Insert a new cocktail
+      operationId: insertCocktail
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Cocktail'
+      responses:
+        201:
+          description: The created cocktail
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cocktail'
+    get:
+      summary: Search for a cocktail
+      operationId: searchCocktail
+      parameters:
+        - name: q
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: A list of matching cocktails
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Cocktail'
   /cocktail/{id}:
     parameters:
       - name: id
+        description: The ID of a cocktail
         in: path
         required: true
         schema:
@@ -30,7 +71,7 @@ paths:
       operationId: getCocktail
       responses:
         200:
-          description: The searched cocktail
+          description: The requested cocktail
           content:
             application/json:
               schema:
@@ -55,25 +96,229 @@ paths:
                 $ref: '#/components/schemas/Cocktail'
         404:
           $ref: "#/components/responses/NotFound"
-  /cocktail:
+
+  /cocktail/category:
     post:
-      summary: Insert a new cocktail
-      operationId: insertCocktail
+      summary: Insert a new cocktail category
+      operationId: insertCocktailCategory
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Cocktail'
+              $ref: '#/components/schemas/CocktailCategory'
       responses:
         201:
-          description: The created cocktail
+          description: The created cocktail category
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Cocktail'
-        422:
-          $ref: '#/components/responses/SemanticError'
+                $ref: '#/components/schemas/CocktailCategory'
+    get:
+      summary: Search for a cocktail category
+      operationId: searchCocktailCategory
+      parameters:
+        - name: q
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: A list of matching cocktail categories
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CocktailCategory'
+  /cocktail/category/{id}:
+    parameters:
+      - name: id
+        description: The ID of a cocktail category
+        in: path
+        required: true
+        schema:
+          type: string
+    get:
+      summary: Get a cocktail category by its ID
+      operationId: getCocktailCategory
+      responses:
+        200:
+          description: The requested cocktail category
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CocktailCategory"
+        404:
+          $ref: "#/components/responses/NotFound"
+    put:
+      summary: Update a cocktail category
+      operationId: updateCocktailCategory
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CocktailCategory'
+      responses:
+        200:
+          description: The updated cocktail category
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CocktailCategory'
+        404:
+          $ref: "#/components/responses/NotFound"
+
+  /ingredient:
+    post:
+      summary: Insert a new ingredient
+      operationId: insertIngredient
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Ingredient'
+      responses:
+        201:
+          description: The created ingredient
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Ingredient'
+    get:
+      summary: Search for an ingredient
+      operationId: searchIngredient
+      parameters:
+        - name: q
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: A list of matching ingredients
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Ingredient'
+  /ingredient/{id}:
+    parameters:
+      - name: id
+        description: The ID of an ingredient
+        in: path
+        required: true
+        schema:
+          type: string
+    get:
+      summary: Get an ingredient by its ID
+      operationId: getIngredient
+      responses:
+        200:
+          description: The requested ingredient
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Ingredient"
+        404:
+          $ref: "#/components/responses/NotFound"
+    put:
+      summary: Update an ingredient
+      operationId: updateIngredient
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Ingredient'
+      responses:
+        200:
+          description: The updated ingredient
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Ingredient'
+        404:
+          $ref: "#/components/responses/NotFound"
+
+  /ingredient/category:
+    post:
+      summary: Insert a new ingredient category
+      operationId: insertIngredientCategory
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IngredientCategory'
+      responses:
+        201:
+          description: The created ingredient category
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IngredientCategory'
+    get:
+      summary: Search for an ingredient category
+      operationId: searchIngredientCategory
+      parameters:
+        - name: q
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: A list of matching ingredient categories
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/IngredientCategory'
+  /ingredient/category/{id}:
+    parameters:
+      - name: id
+        description: The ID of an ingredient category
+        in: path
+        required: true
+        schema:
+          type: string
+    get:
+      summary: Get an ingredient category by its ID
+      operationId: getIngredientCategory
+      responses:
+        200:
+          description: The requested ingredient category
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/IngredientCategory"
+        404:
+          $ref: "#/components/responses/NotFound"
+    put:
+      summary: Update an ingredient category
+      operationId: updateIngredientCategory
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IngredientCategory'
+      responses:
+        200:
+          description: The updated ingredient category
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IngredientCategory'
+        404:
+          $ref: "#/components/responses/NotFound"
+
 components:
   schemas:
     Cocktail:
@@ -205,3 +450,10 @@ components:
           schema:
             example: Unprocessable Entity
             type: string
+
+  securitySchemes:
+    auth:
+      type: apiKey
+      description: An API key issued by server
+      name: ApiKey
+      in: header
