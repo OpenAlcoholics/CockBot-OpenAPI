@@ -404,7 +404,6 @@ components:
         - ingredients
         - category
         - glass
-        - imageLink
         - revisionDate
       properties:
         id:
@@ -443,7 +442,6 @@ components:
         - id
         - name
         - share
-        - imageLink
         - alcoholPercentage
         - category
       properties:
@@ -477,7 +475,6 @@ components:
         - id
         - name
         - description
-        - imageLink
       properties:
         id:
           example: 123
@@ -497,7 +494,6 @@ components:
         - id
         - name
         - alcoholic
-        - imageLink
       properties:
         id:
           example: 123
@@ -517,7 +513,6 @@ components:
         - id
         - name
         - estimatedSize
-        - imageLink
       properties:
         id:
           example: 123
