@@ -414,7 +414,7 @@ components:
       properties:
         apiVersion:
           example: 1.0.0
-          description: The version
+          description: The API version
           type: string
         implementation:
           $ref: "#/components/schemas/ImplementationInfo"
