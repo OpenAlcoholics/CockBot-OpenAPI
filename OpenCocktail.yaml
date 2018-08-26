@@ -54,6 +54,12 @@ paths:
           required: false
           schema:
             type: integer
+        - name: alcoholic
+          description: Whether to search only for alcoholic/non-alcoholic cocktails
+          in: query
+          required: false
+          schema:
+            type: boolean
       responses:
         200:
           description: A list of matching cocktails
@@ -426,14 +432,16 @@ components:
         - version
       properties:
         name:
+          description: The name of the implementation
           example: CocktailParty
           type: string
         version:
+          description: The version of the implementation
           example: 1.0.0
           type: string
         projectInfo:
-          description: URL to project website
-          example: OpenCocktail.party
+          description: URL to the project website
+          example: https://github.com/OpenAlcoholics/CocktailParty
           type: string
     Cocktail:
       type: object
@@ -447,15 +455,19 @@ components:
         - revisionDate
       properties:
         id:
+          description: The cocktail ID
           example: 42
           type: integer
         name:
+          description: The name of the cocktail
           example: Tequila Sunrise
           type: string
         description:
+          description: A description of the cocktail
           example: Resembles a beautiful sunrise
           type: string
         ingredients:
+          description: "A list of ingredients. Items may be a single ingredient or a list of ingredients which can be poured simulatenously."
           type: array
           items:
             oneOf:
@@ -468,12 +480,15 @@ components:
         glass:
           $ref: "#/components/schemas/Glass"
         imageLink:
+          description: A link to an image of the cocktail
           example: https://exampleimage.link
           type: string
         revisionDate:
+          description: The time of the latest update to the recipe
           type: string
           format: date
         notes:
+          description: Arbitrary notes on the cocktail
           example: This is a note on a cocktail
           type: string
     Ingredient:
@@ -481,32 +496,37 @@ components:
       required:
         - id
         - name
-        - share
         - alcoholPercentage
         - category
       properties:
         id:
+          description: The ingredient ID
           example: 123
           type: integer
         name:
+          description: The name of the ingredient
           example: Sierra Silver Tequila
           type: string
         share:
+          description: The share in a cocktail of the ingredient in percent
           example: 20
           type: integer
           format: int32
           minimum: 0
           maximum: 100
         imageLink:
+          description: A link to an image of the ingredient
           example: https://exampleimage.link
           type: string
         alcoholPercentage:
+          description: The percentage of alcohol content in the ingredient
           example: 38
           type: integer
           format: int32
         category:
           "$ref": "#/components/schemas/IngredientCategory"
         notes:
+          description: Arbitrary notes on the ingredient
           example: This is a note on an ingredient
           type: string
     CocktailCategory:
@@ -517,15 +537,19 @@ components:
         - description
       properties:
         id:
+          description: The category ID
           example: 123
           type: integer
         name:
+          description: The name of the category
           example: Basics
           type: string
         description:
+          description: The description for the category
           example: Cocktails everybody knows
           type: string
         imageLink:
+          description: A link to an image representing the category
           example: https://exampleimage.link
           type: string
     IngredientCategory:
@@ -536,15 +560,19 @@ components:
         - alcoholic
       properties:
         id:
+          description: The category ID
           example: 123
           type: integer
         name:
+          description: The name of the category
           example: Tequila
           type: string
         alcholic:
+          description: Whether ingredients of this category contain alcohol
           example: true
           type: boolean
         imageLink:
+          description: A link to an image representing the category
           example: https://exampleimage.link
           type: string
     Glass:
@@ -555,17 +583,20 @@ components:
         - estimatedSize
       properties:
         id:
+          description: The glass ID
           example: 123
           type: integer
         name:
+          description: The name of the glass type
           example: Collins glass
           type: string
         estimatedSize:
-          example: 400
           description: Typical glass size in milliliters
+          example: 400
           type: integer
           format: int32
         imageLink:
+          description: A link to an image of the type of glass
           example: https://exampleimage.link
           type: string
 
