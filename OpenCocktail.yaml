@@ -20,8 +20,7 @@ paths:
           content:
             application/json:
               schema:
-                example: 1.0.0
-                type: string
+                $ref: '#/components/schemas/Version'
 
   /cocktail:
     post:
@@ -407,6 +406,35 @@ paths:
 
 components:
   schemas:
+    Version:
+      type: object
+      required:
+        - apiVersion
+        - implementation
+      properties:
+        apiVersion:
+          example: 1.0.0
+          description: The version
+          type: string
+        implementation:
+          $ref: "#/components/schemas/ImplementationInfo"
+    ImplementationInfo:
+      type: object
+      description: Information about the implementation serving the API
+      required:
+        - name
+        - version
+      properties:
+        name:
+          example: CocktailParty
+          type: string
+        version:
+          example: 1.0.0
+          type: string
+        projectInfo:
+          description: URL to project website
+          example: OpenCocktail.party
+          type: string
     Cocktail:
       type: object
       required:
