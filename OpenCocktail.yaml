@@ -413,6 +413,7 @@ paths:
 components:
   schemas:
     Version:
+      description: Describes the server version.
       type: object
       required:
         - apiVersion
@@ -425,14 +426,14 @@ components:
         implementation:
           $ref: "#/components/schemas/ImplementationInfo"
     ImplementationInfo:
+      description: Information about the implementation serving the API.
       type: object
-      description: Information about the implementation serving the API
       required:
         - name
         - version
       properties:
         name:
-          description: The name of the implementation
+          description: The name of the server implementation.
           example: CocktailParty
           type: string
         version:
@@ -444,6 +445,7 @@ components:
           example: https://github.com/OpenAlcoholics/CocktailParty
           type: string
     Cocktail:
+      description: Information about a cocktail and its recipe.
       type: object
       required:
         - id
@@ -492,6 +494,7 @@ components:
           example: This is a note on a cocktail
           type: string
     Ingredient:
+      description: A liquid ingredient of a cocktail.
       type: object
       required:
         - id
@@ -530,6 +533,7 @@ components:
           example: This is a note on an ingredient
           type: string
     CocktailCategory:
+      description: A cocktail category.
       type: object
       required:
         - id
@@ -553,6 +557,7 @@ components:
           example: https://exampleimage.link
           type: string
     IngredientCategory:
+      description: An ingredient category.
       type: object
       required:
         - id
@@ -576,6 +581,7 @@ components:
           example: https://exampleimage.link
           type: string
     Glass:
+      description: A type of cocktail glass.
       type: object
       required:
         - id
