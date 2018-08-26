@@ -49,6 +49,12 @@ paths:
           required: true
           schema:
             type: string
+        - name: category
+          description: A cocktail category ID
+          in: query
+          required: false
+          schema:
+            type: integer
       responses:
         200:
           description: A list of matching cocktails
@@ -197,6 +203,12 @@ paths:
           required: true
           schema:
             type: string
+        - name: category
+          description: An ingredient category ID
+          in: query
+          required: false
+          schema:
+            type: integer
       responses:
         200:
           description: A list of matching ingredients
