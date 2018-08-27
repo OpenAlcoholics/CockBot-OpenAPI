@@ -107,6 +107,12 @@ paths:
                 $ref: '#/components/schemas/Cocktail'
         404:
           $ref: "#/components/responses/NotFound"
+    delete:
+      summary: Delete a cocktail
+      operationId: deleteCocktail
+      responses:
+        204:
+          description: Sucessfully deleted
 
   /cocktail/category:
     post:
@@ -181,6 +187,12 @@ paths:
                 $ref: '#/components/schemas/CocktailCategory'
         404:
           $ref: "#/components/responses/NotFound"
+    delete:
+      summary: Delete a cocktail category
+      operationId: deleteCocktailCategory
+      responses:
+        204:
+          description: Sucessfully deleted
 
   /ingredient:
     post:
@@ -261,6 +273,12 @@ paths:
                 $ref: '#/components/schemas/Ingredient'
         404:
           $ref: "#/components/responses/NotFound"
+    delete:
+      summary: Delete an ingredient
+      operationId: deleteIngredient
+      responses:
+        204:
+          description: Sucessfully deleted
 
   /ingredient/category:
     post:
@@ -335,6 +353,12 @@ paths:
                 $ref: '#/components/schemas/IngredientCategory'
         404:
           $ref: "#/components/responses/NotFound"
+    delete:
+      summary: Delete an ingredient category
+      operationId: deleteIngredientCategory
+      responses:
+        204:
+          description: Sucessfully deleted
 
   /glass:
     post:
@@ -409,6 +433,12 @@ paths:
                 $ref: '#/components/schemas/Glass'
         404:
           $ref: "#/components/responses/NotFound"
+    delete:
+      summary: Delete a glass
+      operationId: deleteGlass
+      responses:
+        204:
+          description: Sucessfully deleted
 
 components:
   schemas:
