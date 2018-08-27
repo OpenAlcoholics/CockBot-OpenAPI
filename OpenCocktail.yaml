@@ -16,7 +16,7 @@ paths:
       security: []
       responses:
         200:
-          description: The plain semantic version number as a string
+          description: Information about the implemented API version and the implementation.
           content:
             application/json:
               schema:
