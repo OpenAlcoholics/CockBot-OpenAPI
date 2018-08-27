@@ -76,7 +76,7 @@ paths:
         in: path
         required: true
         schema:
-          type: string
+          type: integer
     get:
       summary: Get a cocktail by its ID
       operationId: getCocktail
@@ -156,7 +156,7 @@ paths:
         in: path
         required: true
         schema:
-          type: string
+          type: integer
     get:
       summary: Get a cocktail category by its ID
       operationId: getCocktailCategory
@@ -242,7 +242,7 @@ paths:
         in: path
         required: true
         schema:
-          type: string
+          type: integer
     get:
       summary: Get an ingredient by its ID
       operationId: getIngredient
@@ -322,7 +322,7 @@ paths:
         in: path
         required: true
         schema:
-          type: string
+          type: integer
     get:
       summary: Get an ingredient category by its ID
       operationId: getIngredientCategory
@@ -402,7 +402,7 @@ paths:
         in: path
         required: true
         schema:
-          type: string
+          type: integer
     get:
       summary: Get a glass by its ID
       operationId: getGlass
