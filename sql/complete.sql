@@ -69,3 +69,32 @@ CREATE TABLE drink_ingredients
     CONSTRAINT drink_ingredients_drinks_id_fk FOREIGN KEY (drink_id) REFERENCES drinks (id) ON DELETE CASCADE ON UPDATE CASCADE,
     CONSTRAINT drink_ingredients_ingredients_id_fk FOREIGN KEY (ingredient_id) REFERENCES ingredients (id) ON DELETE CASCADE ON UPDATE CASCADE
 );
+
+CREATE TABLE accessories_categories
+(
+    id integer DEFAULT nextval('accessories_categories_id_seq'::regclass) PRIMARY KEY NOT NULL,
+    name varchar(255) NOT NULL,
+    description varchar(2048),
+    image_link varchar(512)
+);
+CREATE UNIQUE INDEX accessories_categories_id_uindex ON ingredient_categories (id);
+
+CREATE TABLE accessories
+(
+    id integer DEFAULT nextval('accessories_id_seq'::regclass) PRIMARY KEY NOT NULL,
+    name varchar(255) NOT NULL,
+    description varchar(512),
+    image_link varchar(512),
+    category integer NOT NULL -- accessories_categories
+);
+CREATE UNIQUE INDEX accessories_id_uindex ON accessories (id);
+
+CREATE TABLE drink_accessories
+(
+    drink_id integer NOT NULL,
+    accessories_id integer NOT NULL,
+    pieces integer,
+    before boolean, -- Should we keep this?
+    CONSTRAINT drink_accessories_drinks_id_fk FOREIGN KEY (drink_id) REFERENCES drinks (id) ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT drink_accessories_accessories_id_fk FOREIGN KEY (accessories_id) REFERENCES accessories (id) ON DELETE CASCADE ON UPDATE CASCADE
+);

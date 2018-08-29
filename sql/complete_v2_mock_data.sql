@@ -1,4 +1,4 @@
-INSERT INTO ingredient_categories (name, description, image_link, is_accessory, is_alcoholic)
+INSERT INTO ingredient_categories (name, description, image_link, is_alcoholic)
 VALUES (
 	"Tonic Water",
 	"Tonic water (or Indian tonic water) is a carbonated soft drink in which quinine is dissolved. Originally used as a prophylactic against malaria, tonic water usually now has a significantly lower quinine content and is consumed for its distinctive bitter flavor. It is often used in mixed drinks, particularly in gin and tonic.",
@@ -7,20 +7,11 @@ VALUES (
 	false
 );
 
-INSERT INTO ingredient_categories (name, description, image_link, is_accessory, is_alcoholic)
+INSERT INTO ingredient_categories (name, description, image_link, is_alcoholic)
 VALUES (
 	"Gin",
 	"Gin is liquor which derives its predominant flavour from juniper berries (Juniperus communis). Gin is one of the broadest categories of spirits, all of various origins, styles, and flavour profiles that revolve around juniper as a common ingredient.",
 	"https://cdn.pixabay.com/photo/2017/05/10/08/05/gin-2300126_960_720.png",
-	false,
-	true
-);
-
-INSERT INTO ingredient_categories (name, description, image_link, is_accessory, is_alcoholic)
-VALUES (
-	"Cucumber slice",
-	"Slice of a cucumber",
-	"https://c1.staticflickr.com/4/3234/2738586453_f23bc8244e_b.jpg",
 	false,
 	true
 );
@@ -67,4 +58,59 @@ VALUES (
 	"",
 	"0",
 	(SELECT id FROM ingredient_categories WHERE ingredient_categories.name = "Tonic Water")
+);
+
+INSERT INTO ingredients (name, image_link, notes, alcohol_percentage, category)
+VALUES (
+	"Cucumber slice",
+	"https://c1.staticflickr.com/4/3234/2738586453_f23bc8244e_b.jpg",,
+	"Slice of a cucumber",
+	"0",
+	(SELECT id FROM ingredient_categories WHERE ingredient_categories.name = "Tonic Water")
+);
+
+INSERT INTO drink_ingredients (drink_id, ingredient_id, share, rank)
+VALUES (
+	(SELECT id FROM drinks WHERE drinks.name = "Gin & Tonic"),
+	(SELECT id FROM ingredients WHERE ingredients.name = "Hendricks Gin"),
+	50,
+	0
+);
+
+INSERT INTO drink_ingredients (drink_id, ingredient_id, share, rank)
+VALUES (
+	(SELECT id FROM drinks WHERE drinks.name = "Gin & Tonic"),
+	(SELECT id FROM ingredients WHERE ingredients.name = "Tonic Water"),
+	50,
+	0
+);
+
+INSERT INTO accessories (name, description, image_link)
+VALUES (
+	"Cucumber slice",
+	"Slice of a cucumber",
+	"https://c1.staticflickr.com/4/3234/2738586453_f23bc8244e_b.jpg"
+);
+
+INSERT INTO accessories (name, description, image_link)
+VALUES (
+	"Ice cube",
+	"This should really be self explanatory...",
+	""
+);
+
+INSERT INTO drink_accessories (drink_id, accessories_id, pieces, before)
+VALUES (
+	(SELECT id FROM drinks WHERE drinks.name = "Gin & Tonic"),
+	(SELECT id FROM accessories WHERE accessories.name = "Cucumber slice"),
+	2,
+	false
+);
+
+INSERT INTO drink_accessories (drink_id, accessories_id, pieces, before)
+VALUES (
+	(SELECT id FROM drinks WHERE drinks.name = "Gin & Tonic"),
+	(SELECT id FROM accessories WHERE accessories.name = "Ice cube"),
+	4,
+	true
 );
