@@ -7,5 +7,5 @@ VALUES (
 INSERT INTO accessories_categories (name, description, image_link)
 VALUES (
 	'Ice',
-	'This, really? It\'s fucking frozen water people.'
+	'This, really? It is fucking frozen water people.'
 );
