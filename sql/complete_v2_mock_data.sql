@@ -26,7 +26,7 @@ VALUES (
 INSERT INTO categories (name, description, image_link)
 VALUES (
 	'Highballs', 
-	'Highballs are called "long" drinks as they are usually a sour or stirred base that is lengthened by the addition of carbonated water. The base may be sometimes be shaken before the addition of carbonated water or built in the glass and stirred to combine. Highballs are served in a tall glass over ice. Iconic highballs include the Gin & Tonic, the Moscow Mule, and the Mojito.',
+	'Highballs are called long drinks as they are usually a sour or stirred base that is lengthened by the addition of carbonated water. The base may be sometimes be shaken before the addition of carbonated water or built in the glass and stirred to combine. Highballs are served in a tall glass over ice. Iconic highballs include the Gin & Tonic, the Moscow Mule, and the Mojito.',
 	'https://cdn.shopify.com/s/files/1/0583/3185/files/liber_gin_tonic_medium.jpg?v=1500514523'
 );
 
@@ -35,7 +35,7 @@ VALUES (
 	'Gin & Tonic',
 	'In a highball glass filled with ice cubes, pour the gin then top it with tonic. Stir well. Garnish with a cucumber slice.',
 	'https://www.thespruceeats.com/thmb/9g5q0ChNcHs5IjThGwciEsa5d0Y=/960x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/gin-tonic-5a8f334b8e1b6e0036a9631d.jpg',
-	'Classic and easy, the gin and tonic is light and refreshing. It\'s a simple mixed drink—requiring just the two ingredients—and is perfect for happy hour, dinner, or anytime you simply want an invigorating beverage.',
+	'Classic and easy, the gin and tonic is light and refreshing. It is a simple mixed drink—requiring just the two ingredients—and is perfect for happy hour, dinner, or anytime you simply want an invigorating beverage.',
 	'2018-08-29',
 	'Hendricks Gin is best paired with a cucumber and a mold tonic water.',
 	(SELECT id FROM categories WHERE categories.name = 'Highballs'),
