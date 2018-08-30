@@ -488,13 +488,11 @@ components:
       description: Information about a cocktail and its recipe.
       type: object
       required:
-        - id
         - name
         - description
         - ingredients
         - category
         - glass
-        - revisionDate
       properties:
         id:
           description: The cocktail ID
@@ -537,7 +535,6 @@ components:
       description: A liquid ingredient of a cocktail.
       type: object
       required:
-        - id
         - name
         - alcoholPercentage
         - category
@@ -576,7 +573,6 @@ components:
       description: A cocktail category.
       type: object
       required:
-        - id
         - name
         - description
       properties:
@@ -600,7 +596,6 @@ components:
       description: An ingredient category.
       type: object
       required:
-        - id
         - name
         - alcoholic
       properties:
@@ -624,7 +619,6 @@ components:
       description: A type of cocktail glass.
       type: object
       required:
-        - id
         - name
         - estimatedSize
       properties:
