@@ -10,7 +10,7 @@ VALUES (
 INSERT INTO ingredients (name, image_link, notes, alcohol_percentage, category)
 VALUES (
 	'Tonic Water',
-	'https://cdn.pixabay.com/photo/2017/05/10/08/05/gin-2300126_960_720.png',,
+	'https://cdn.pixabay.com/photo/2017/05/10/08/05/gin-2300126_960_720.png',
 	'',
 	'0',
 	(SELECT id FROM ingredient_categories WHERE ingredient_categories.name = 'Tonic Water')
@@ -19,7 +19,7 @@ VALUES (
 INSERT INTO ingredients (name, image_link, notes, alcohol_percentage, category)
 VALUES (
 	'Cucumber slice',
-	'https://c1.staticflickr.com/4/3234/2738586453_f23bc8244e_b.jpg',,
+	'https://c1.staticflickr.com/4/3234/2738586453_f23bc8244e_b.jpg',
 	'Slice of a cucumber',
 	'0',
 	(SELECT id FROM ingredient_categories WHERE ingredient_categories.name = 'Tonic Water')
@@ -28,7 +28,7 @@ VALUES (
 INSERT INTO ingredients (name, image_link, notes, alcohol_percentage, category)
 VALUES (
 	'Orange juice',
-	'TODO',,
+	'TODO',
 	'TODO',
 	'0',
 	(SELECT id FROM ingredient_categories WHERE ingredient_categories.name = 'Juice')
@@ -37,7 +37,7 @@ VALUES (
 INSERT INTO ingredients (name, image_link, notes, alcohol_percentage, category)
 VALUES (
 	'Three Sixty Vodka',
-	'TODO',,
+	'TODO',
 	'TODO',
 	'TODO',
 	(SELECT id FROM ingredient_categories WHERE ingredient_categories.name = 'Vodka')
