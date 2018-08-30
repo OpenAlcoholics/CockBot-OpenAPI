@@ -3,7 +3,7 @@ VALUES (
 	'Hendricks Gin',
 	'https://upload.wikimedia.org/wikipedia/commons/2/25/Gin_Hendricks.jpg',
 	'Earthy',
-	'44',
+	44,
 	(SELECT id FROM ingredient_categories WHERE ingredient_categories.name = 'Gin')
 );
 
@@ -12,7 +12,7 @@ VALUES (
 	'Tonic Water',
 	'https://cdn.pixabay.com/photo/2017/05/10/08/05/gin-2300126_960_720.png',
 	'',
-	'0',
+	0,
 	(SELECT id FROM ingredient_categories WHERE ingredient_categories.name = 'Tonic Water')
 );
 
@@ -21,7 +21,7 @@ VALUES (
 	'Cucumber slice',
 	'https://c1.staticflickr.com/4/3234/2738586453_f23bc8244e_b.jpg',
 	'Slice of a cucumber',
-	'0',
+	0,
 	(SELECT id FROM ingredient_categories WHERE ingredient_categories.name = 'Tonic Water')
 );
 
@@ -30,7 +30,7 @@ VALUES (
 	'Orange juice',
 	'TODO',
 	'TODO',
-	'0',
+	0,
 	(SELECT id FROM ingredient_categories WHERE ingredient_categories.name = 'Juice')
 );
 
@@ -39,6 +39,6 @@ VALUES (
 	'Three Sixty Vodka',
 	'TODO',
 	'TODO',
-	'TODO',
+	37
 	(SELECT id FROM ingredient_categories WHERE ingredient_categories.name = 'Vodka')
 );
