@@ -27,7 +27,7 @@ VALUES (
 
 INSERT INTO ingredients (name, image_link, notes, alcohol_percentage, category)
 VALUES (
-	'Orange juice',
+	'Orange Juice',
 	'TODO',
 	'TODO',
 	0,
