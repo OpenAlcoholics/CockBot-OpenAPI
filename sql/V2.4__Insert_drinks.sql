@@ -9,3 +9,15 @@ VALUES (
 	(SELECT id FROM categories WHERE categories.name = "Highballs"),
 	(SELECT id FROM glasses WHERE glasses.name = "Highball")
 );
+
+INSERT INTO drinks (name, instructions, image_link, description, revision_date, notes, category, glass)
+VALUES (
+	"Vodka-O",
+	"TODO",
+	"TODO",
+	"TODO",
+	"2018-08-30",
+	"TODO",
+	(SELECT id FROM categories WHERE categories.name = "Highballs"), -- Is this correct?
+	(SELECT id FROM glasses WHERE glasses.name = "Highball")
+);

@@ -24,3 +24,21 @@ VALUES (
 	"0",
 	(SELECT id FROM ingredient_categories WHERE ingredient_categories.name = "Tonic Water")
 );
+
+INSERT INTO ingredients (name, image_link, notes, alcohol_percentage, category)
+VALUES (
+	"Orange juice",
+	"TODO",,
+	"TODO",
+	"0",
+	(SELECT id FROM ingredient_categories WHERE ingredient_categories.name = "Juice")
+);
+
+INSERT INTO ingredients (name, image_link, notes, alcohol_percentage, category)
+VALUES (
+	"Three Sixty Vodka",
+	"TODO",,
+	"TODO",
+	"TODO",
+	(SELECT id FROM ingredient_categories WHERE ingredient_categories.name = "Vodka")
+);
