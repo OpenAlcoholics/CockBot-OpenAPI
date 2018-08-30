@@ -39,6 +39,6 @@ VALUES (
 	'Three Sixty Vodka',
 	'TODO',
 	'TODO',
-	37
+	37,
 	(SELECT id FROM ingredient_categories WHERE ingredient_categories.name = 'Vodka')
 );
