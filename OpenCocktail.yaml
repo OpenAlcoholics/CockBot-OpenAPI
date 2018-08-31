@@ -610,6 +610,10 @@ components:
           description: The name of the category
           example: Tequila
           type: string
+        description:
+          description: A description of the category
+          example: It's tequila.
+          type: string
         alcoholic:
           description: Whether ingredients of this category contain alcohol
           example: true
