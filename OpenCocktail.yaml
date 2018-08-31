@@ -488,6 +488,7 @@ components:
       description: Information about a cocktail and its recipe.
       type: object
       required:
+        - id
         - name
         - description
         - ingredients
@@ -498,6 +499,7 @@ components:
           description: The cocktail ID
           example: 42
           type: integer
+          readOnly: true
         name:
           description: The name of the cocktail
           example: Tequila Sunrise
@@ -536,6 +538,7 @@ components:
       description: A liquid ingredient of a cocktail.
       type: object
       required:
+        - id
         - name
         - alcoholPercentage
         - category
@@ -544,6 +547,7 @@ components:
           description: The ingredient ID
           example: 123
           type: integer
+          readOnly: true
         name:
           description: The name of the ingredient
           example: Sierra Silver Tequila
@@ -575,6 +579,7 @@ components:
       description: A cocktail category.
       type: object
       required:
+        - id
         - name
         - description
       properties:
@@ -582,6 +587,7 @@ components:
           description: The category ID
           example: 123
           type: integer
+          readOnly: true
         name:
           description: The name of the category
           example: Basics
@@ -599,6 +605,7 @@ components:
       description: An ingredient category.
       type: object
       required:
+        - id
         - name
         - alcoholic
       properties:
@@ -606,6 +613,7 @@ components:
           description: The category ID
           example: 123
           type: integer
+          readOnly: true
         name:
           description: The name of the category
           example: Tequila
@@ -623,6 +631,7 @@ components:
       description: A type of cocktail glass.
       type: object
       required:
+        - id
         - name
         - estimatedSize
       properties:
@@ -630,6 +639,7 @@ components:
           description: The glass ID
           example: 123
           type: integer
+          readOnly: true
         name:
           description: The name of the glass type
           example: Collins glass
