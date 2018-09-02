@@ -525,9 +525,9 @@ components:
           type: string
           nullable: true
         revisionDate:
-          description: The time of the latest update to the recipe
-          type: string
-          format: date
+          description: The time of the latest update to the recipe as a unix timestamp.
+          type: integer
+          format: int64
         notes:
           description: Arbitrary notes on the cocktail
           example: This is a note on a cocktail
