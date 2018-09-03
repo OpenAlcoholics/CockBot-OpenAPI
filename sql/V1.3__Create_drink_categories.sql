@@ -1,4 +1,4 @@
-CREATE TABLE categories
+CREATE TABLE drink_categories
 (
     id integer DEFAULT nextval('categories_id_seq'::regclass) PRIMARY KEY NOT NULL,
     name varchar(255) NOT NULL,

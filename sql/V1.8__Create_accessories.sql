@@ -4,6 +4,6 @@ CREATE TABLE accessories
     name varchar(255) NOT NULL,
     description varchar(512),
     image_link varchar(512),
-    category integer NOT NULL -- accessories_categories
+    category_id integer NOT NULL -- accessories_categories
 );
 CREATE UNIQUE INDEX accessories_id_uindex ON accessories (id);

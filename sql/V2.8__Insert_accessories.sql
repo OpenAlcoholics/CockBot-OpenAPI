@@ -1,4 +1,4 @@
-INSERT INTO accessories (name, description, image_link, category)
+INSERT INTO accessories (name, description, image_link, category_id)
 VALUES (
 	'Cucumber slice',
 	'Slice of a cucumber',
@@ -6,7 +6,7 @@ VALUES (
 	(SELECT id FROM accessories_categories WHERE accessories_categories.name = 'Cucumber slice')
 );
 
-INSERT INTO accessories (name, description, image_link, category)
+INSERT INTO accessories (name, description, image_link, category_id)
 VALUES (
 	'Ice cube',
 	'This should really be self explanatory...',
