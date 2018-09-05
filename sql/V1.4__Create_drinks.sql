@@ -4,7 +4,7 @@ CREATE TABLE drinks
     name varchar(255) NOT NULL,
     image_link varchar(512),
     description varchar(1024),
-    revision_date date NOT NULL,
+    revision_date integer NOT NULL, -- unix timestamp
     notes text,
     category_id integer NOT NULL,
     glass_id integer NOT NULL,

@@ -3,7 +3,7 @@ VALUES (
 	'Gin & Tonic',
 	'https://www.thespruceeats.com/thmb/9g5q0ChNcHs5IjThGwciEsa5d0Y=/960x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/gin-tonic-5a8f334b8e1b6e0036a9631d.jpg',
 	'Classic and easy, the gin and tonic is light and refreshing. It is a simple mixed drink—requiring just the two ingredients—and is perfect for happy hour, dinner, or anytime you simply want an invigorating beverage.',
-	'2018-08-29',
+	1535500800,
 	'Hendricks Gin is best paired with a cucumber and a mold tonic water.',
 	(SELECT id FROM drink_categories WHERE drink_categories.name = 'Highballs'),
 	(SELECT id FROM glasses WHERE glasses.name = 'Highball'),
@@ -15,7 +15,7 @@ VALUES (
 	'Vodka-O',
 	'TODO',
 	'TODO',
-	'2018-08-30',
+	1535587200,
 	'TODO',
 	(SELECT id FROM drink_categories WHERE drink_categories.name = 'Highballs'), -- Is this correct?
 	(SELECT id FROM glasses WHERE glasses.name = 'Highball'),
