@@ -5,7 +5,7 @@ VALUES (
 	'Classic and easy, the gin and tonic is light and refreshing. It is a simple mixed drink—requiring just the two ingredients—and is perfect for happy hour, dinner, or anytime you simply want an invigorating beverage.',
 	'2018-08-29',
 	'Hendricks Gin is best paired with a cucumber and a mold tonic water.',
-	(SELECT id FROM drink_categories WHERE categories.name = 'Highballs'),
+	(SELECT id FROM drink_categories WHERE drink_categories.name = 'Highballs'),
 	(SELECT id FROM glasses WHERE glasses.name = 'Highball'),
 	true
 );
@@ -17,7 +17,7 @@ VALUES (
 	'TODO',
 	'2018-08-30',
 	'TODO',
-	(SELECT id FROM drink_categories WHERE categories.name = 'Highballs'), -- Is this correct?
+	(SELECT id FROM drink_categories WHERE drink_categories.name = 'Highballs'), -- Is this correct?
 	(SELECT id FROM glasses WHERE glasses.name = 'Highball'),
 	true
 );
