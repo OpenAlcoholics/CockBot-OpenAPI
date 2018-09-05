@@ -507,7 +507,7 @@ components:
           example: Resembles a beautiful sunrise
           type: string
         ingredients:
-          description: "A list of ingredients. Items may be a single ingredient or a list of ingredients which can be poured simulatenously."
+          description: "A list of ingredients. Items may be a single ingredient or a list of ingredients which can be poured simultaneously."
           type: array
           items:
             oneOf:
