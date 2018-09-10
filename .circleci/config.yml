@@ -7,17 +7,14 @@ jobs:
     steps:
         - checkout
         - run:
-            name: Replace password in flyway.conf
-            command: sed -i -e "s/{{password}}/${OPENCOCKTAIL_CIRCLECI_PASSWORD}/g" flyway.conf
+            name: Replace password in .circleci/flyway.conf
+            command: sed -i -e "s/{{password}}/${OPENCOCKTAIL_CIRCLECI_PASSWORD}/g" .circleci/flyway.conf
         - run:
-            name: Replace password in flyway.conf
-            command: sed -i -e "s/{{base_url}}/${OPENCOCKTAIL_CIRCLECI_BASE_URL}/g" flyway.conf
-        - run:
-            name: Copy sql to flyway folder
-            command: mv sql/* /flyway/sql/
+            name: Replace password in .circleci/flyway.conf
+            command: sed -i -e "s/{{base_url}}/${OPENCOCKTAIL_CIRCLECI_BASE_URL}/g" .circleci/flyway.conf
         - run:
             name: Clean database (only for testing)
-            command: flyway -X clean
+            command: flyway -X -configFiles=.circleci/flyway.conf clean
         - run:
             name: Execute migration
-            command: flyway -X migrate
+            command: flyway -X -configFiles=.circleci/flyway.conf  migrate
