@@ -21,3 +21,15 @@ VALUES (
 	(SELECT id FROM glasses WHERE glasses.name = 'Highball'),
 	true
 );
+
+INSERT INTO drinks (name, image_link, description, revision_date, notes, category_id, glass_id, ice_cubes)
+VALUES (
+	'Virgin Vodka-O',
+	'TODO',
+	'TODO',
+	1536537600,
+	'TODO',
+	(SELECT id FROM drink_categories WHERE drink_categories.name = 'Highballs'), -- Is this correct?
+	(SELECT id FROM glasses WHERE glasses.name = 'Highball'),
+	true
+);

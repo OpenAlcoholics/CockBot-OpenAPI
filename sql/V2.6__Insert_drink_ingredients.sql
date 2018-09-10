@@ -29,3 +29,11 @@ VALUES (
 	30,
 	0
 );
+
+INSERT INTO drink_ingredients (drink_id, ingredient_id, share, rank)
+VALUES (
+	(SELECT id FROM drinks WHERE drinks.name = 'Virgin Vodka-O'),
+	(SELECT id FROM ingredients WHERE ingredients.name = 'Orange Juice'),
+	100,
+	0
+);
