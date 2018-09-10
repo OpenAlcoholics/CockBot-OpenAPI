@@ -1,0 +1,20 @@
+version: 2
+
+jobs:
+  build:
+    docker:
+      - image: boxfuse/flyway:5.1.4
+    steps:
+        - checkout
+        - run:
+            name: Replace password in .circleci/flyway.conf
+            command: sed -i -e "s/{{password}}/${OPENCOCKTAIL_CIRCLECI_PASSWORD}/g" .circleci/flyway.conf
+        - run:
+            name: Replace password in .circleci/flyway.conf
+            command: sed -i -e "s/{{base_url}}/${OPENCOCKTAIL_CIRCLECI_BASE_URL}/g" .circleci/flyway.conf
+        - run:
+            name: Clean database (only for testing)
+            command: flyway -X -configFiles=.circleci/flyway.conf clean
+        - run:
+            name: Execute migration
+            command: flyway -X -configFiles=.circleci/flyway.conf  migrate
