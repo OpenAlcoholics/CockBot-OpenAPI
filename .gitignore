@@ -1,1 +1,4 @@
 flyway.conf
+
+.idea
+*.iml
