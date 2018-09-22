@@ -485,6 +485,7 @@ components:
         - name
         - description
         - ingredients
+        - accessories
         - category
         - glass
       properties:
@@ -509,6 +510,11 @@ components:
             type: array
             items:
               $ref: "#/components/schemas/IngredientShare"
+        accessories:
+          description: A list of accessories that might be applied to the cocktail.
+          type: array
+          items:
+            $ref: "#/components/schemas/Accessory"
         category:
           $ref: "#/components/schemas/CocktailCategory"
         glass:
@@ -623,6 +629,58 @@ components:
           description: Whether ingredients of this category contain alcohol
           example: true
           type: boolean
+        imageLink:
+          description: A link to an image representing the category
+          example: https://exampleimage.link
+          type: string
+          nullable: true
+    Accessory:
+      description: A manually applied accessory for a cocktail
+      type: object
+      required:
+        - name
+        - description
+        - category
+      properties:
+        id:
+          description: The accessory ID
+          example: 123
+          type: integer
+        name:
+          description: The name of the accessory
+          example: Cocktail umbrella
+          type: string
+        description:
+          description: The description of the accessory
+          example: It's a cocktail umbrella.
+          type: string
+        imageLink:
+          description: A link to an image of the accessory
+          example: https://exampleimage.link
+          type: string
+          nullable: true
+        category:
+          "$ref": "#/components/schemas/AccessoryCategory"
+    AccessoryCategory:
+      description: An accessory category.
+      type: object
+      required:
+        - name
+        - description
+        - alcoholic
+      properties:
+        id:
+          description: The category ID
+          example: 123
+          type: integer
+        name:
+          description: The name of the category
+          example: Inedibles
+          type: string
+        description:
+          description: A description of the category
+          example: Don't put it in your mouth.
+          type: string
         imageLink:
           description: A link to an image representing the category
           example: https://exampleimage.link
