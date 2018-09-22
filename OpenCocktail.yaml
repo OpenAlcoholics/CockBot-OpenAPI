@@ -507,14 +507,12 @@ components:
           example: Resembles a beautiful sunrise
           type: string
         ingredients:
-          description: "A list of ingredients. Items may be a single ingredient or a list of ingredients which can be poured simultaneously."
+          description: "A list of ingredient lists. If a list contains multiple ingredients, they can be poured simultaneously."
           type: array
           items:
-            oneOf:
-              - $ref: "#/components/schemas/Ingredient"
-              - type: array
-                items:
-                  $ref: "#/components/schemas/Ingredient"
+            type: array
+            items:
+              $ref: "#/components/schemas/Ingredient"
         category:
           $ref: "#/components/schemas/CocktailCategory"
         glass:
