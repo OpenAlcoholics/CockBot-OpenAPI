@@ -507,12 +507,14 @@ components:
           example: Resembles a beautiful sunrise
           type: string
         ingredients:
-          description: "A list of ingredient lists. If a list contains multiple ingredients, they can be poured simultaneously."
+          description: >
+            A list of ingredient ID lists. If a list contains multiple ingredient IDs,
+            they can be poured simultaneously.
           type: array
           items:
             type: array
             items:
-              $ref: "#/components/schemas/Ingredient"
+              type: $ref: "#/components/schemas/IngredientShare"
         category:
           $ref: "#/components/schemas/CocktailCategory"
         glass:
@@ -530,6 +532,24 @@ components:
           description: Arbitrary notes on the cocktail
           example: This is a note on a cocktail
           type: string
+    IngredientShare:
+      description: The share of an ingredient for a cocktail.
+      type: object
+      required:
+        - ingredientId
+        - share
+      properties:
+        ingredientId:
+          description: The ingredient ID.
+          example: 123
+          type: integer
+        share:
+          description: The share (in percent) of the ingredient in a cocktail.
+          example: 40
+          type: integer
+          format: int32
+          minimum: 0
+          maximum: 100
     Ingredient:
       description: A liquid ingredient of a cocktail.
       type: object
@@ -546,13 +566,6 @@ components:
           description: The name of the ingredient
           example: Sierra Silver Tequila
           type: string
-        share:
-          description: The share in a cocktail of the ingredient in percent
-          example: 20
-          type: integer
-          format: int32
-          minimum: 0
-          maximum: 100
         imageLink:
           description: A link to an image of the ingredient
           example: https://exampleimage.link
