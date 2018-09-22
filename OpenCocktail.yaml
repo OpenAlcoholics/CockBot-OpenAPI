@@ -362,6 +362,176 @@ paths:
         404:
           $ref: "#/components/responses/NotFound"
 
+  /accessory:
+    post:
+      summary: Insert a new accessory
+      operationId: insertAccessory
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Accessory'
+      responses:
+        201:
+          description: The created accessory
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Accessory'
+    get:
+      summary: Search for an accessory
+      operationId: searchAccessory
+      parameters:
+        - name: q
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: category
+          description: An accessory category ID
+          in: query
+          required: false
+          schema:
+            type: integer
+      responses:
+        200:
+          description: A list of matching accessories
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Accessory'
+  /accessory/{id}:
+    parameters:
+      - name: id
+        description: The ID of an accessory
+        in: path
+        required: true
+        schema:
+          type: integer
+    get:
+      summary: Get an accessory by its ID
+      operationId: getAccessory
+      responses:
+        200:
+          description: The requested accessory
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Accessory"
+        404:
+          $ref: "#/components/responses/NotFound"
+    put:
+      summary: Update an accessory
+      operationId: updateAccessory
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Accessory'
+      responses:
+        200:
+          description: The updated accessory
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Accessory'
+        404:
+          $ref: "#/components/responses/NotFound"
+    delete:
+      summary: Delete an accessory
+      operationId: deleteAccessory
+      responses:
+        204:
+          description: Sucessfully deleted
+        404:
+          $ref: "#/components/responses/NotFound"
+
+  /accessory/category:
+    post:
+      summary: Insert a new accessory category
+      operationId: insertAccessoryCategory
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AccessoryCategory'
+      responses:
+        201:
+          description: The created accessory category
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessoryCategory'
+    get:
+      summary: Search for an accessory category
+      operationId: searchAccessoryCategory
+      parameters:
+        - name: q
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: A list of matching accessory categories
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AccessoryCategory'
+  /accessory/category/{id}:
+    parameters:
+      - name: id
+        description: The ID of an accessory category
+        in: path
+        required: true
+        schema:
+          type: integer
+    get:
+      summary: Get an accessory category by its ID
+      operationId: getAccessoryCategory
+      responses:
+        200:
+          description: The requested accessory category
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AccessoryCategory"
+        404:
+          $ref: "#/components/responses/NotFound"
+    put:
+      summary: Update an accessory category
+      operationId: updateAccessoryCategory
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AccessoryCategory'
+      responses:
+        200:
+          description: The updated accessory category
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessoryCategory'
+        404:
+          $ref: "#/components/responses/NotFound"
+    delete:
+      summary: Delete an accessory category
+      operationId: deleteAccessoryCategory
+      responses:
+        204:
+          description: Sucessfully deleted
+        404:
+          $ref: "#/components/responses/NotFound"
+
   /glass:
     post:
       summary: Insert a new glass
