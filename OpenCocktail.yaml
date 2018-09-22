@@ -508,7 +508,7 @@ components:
           items:
             type: array
             items:
-              type: $ref: "#/components/schemas/IngredientShare"
+              $ref: "#/components/schemas/IngredientShare"
         category:
           $ref: "#/components/schemas/CocktailCategory"
         glass:
