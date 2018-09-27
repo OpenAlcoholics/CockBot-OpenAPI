@@ -679,7 +679,7 @@ components:
           items:
             type: array
             items:
-              $ref: "#/components/schemas/IngredientShare"
+              $ref: "#/components/schemas/CocktailIngredient"
         accessories:
           description: A list of accessories that might be applied to the cocktail.
           type: array
@@ -726,8 +726,8 @@ components:
           example: https://exampleimage.link
           type: string
           nullable: true
-    IngredientShare:
-      description: The share of an ingredient for a cocktail.
+    CocktailIngredient:
+      description: The relation of an ingredient to a cocktail.
       type: object
       required:
         - ingredientId
