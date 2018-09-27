@@ -816,7 +816,7 @@ components:
           example: 123
           type: integer
         pieces:
-          description: The suggested amound of pieces of this accessory in a cocktail.
+          description: The suggested amount of pieces of this accessory in a cocktail.
           example: 1
           type: integer
           format: int32
