@@ -684,7 +684,7 @@ components:
           description: A list of accessories that might be applied to the cocktail.
           type: array
           items:
-            $ref: "#/components/schemas/Accessory"
+            $ref: "#/components/schemas/CocktailAccessory"
         category:
           $ref: "#/components/schemas/CocktailCategory"
         glass:
@@ -804,6 +804,23 @@ components:
           example: https://exampleimage.link
           type: string
           nullable: true
+    CocktailAccessory:
+      description: The relation of an accessory to a cocktail.
+      type: object
+      required:
+        - accessoryId
+        - pieces
+      properties:
+        accessoryId:
+          description: The accessory ID.
+          example: 123
+          type: integer
+        pieces:
+          description: The suggested amound of pieces of this accessory in a cocktail.
+          example: 1
+          type: integer
+          format: int32
+          minimum: 0
     Accessory:
       description: A manually applied accessory for a cocktail
       type: object
