@@ -702,6 +702,30 @@ components:
           description: Arbitrary notes on the cocktail
           example: This is a note on a cocktail
           type: string
+    CocktailCategory:
+      description: A cocktail category.
+      type: object
+      required:
+        - name
+        - description
+      properties:
+        id:
+          description: The category ID
+          example: 123
+          type: integer
+        name:
+          description: The name of the category
+          example: Basics
+          type: string
+        description:
+          description: The description for the category
+          example: Cocktails everybody knows
+          type: string
+        imageLink:
+          description: A link to an image representing the category
+          example: https://exampleimage.link
+          type: string
+          nullable: true
     IngredientShare:
       description: The share of an ingredient for a cocktail.
       type: object
@@ -752,30 +776,6 @@ components:
           description: Arbitrary notes on the ingredient
           example: This is a note on an ingredient
           type: string
-    CocktailCategory:
-      description: A cocktail category.
-      type: object
-      required:
-        - name
-        - description
-      properties:
-        id:
-          description: The category ID
-          example: 123
-          type: integer
-        name:
-          description: The name of the category
-          example: Basics
-          type: string
-        description:
-          description: The description for the category
-          example: Cocktails everybody knows
-          type: string
-        imageLink:
-          description: A link to an image representing the category
-          example: https://exampleimage.link
-          type: string
-          nullable: true
     IngredientCategory:
       description: An ingredient category.
       type: object
