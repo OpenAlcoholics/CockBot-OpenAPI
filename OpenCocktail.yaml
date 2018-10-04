@@ -5,8 +5,7 @@ info:
   license:
     name: MIT license
 security:
-  - name:
-    - auth
+  - ApiKey
 paths:
   /version:
     get:
@@ -916,7 +915,7 @@ components:
             type: string
 
   securitySchemes:
-    auth:
+    ApiKey:
       type: apiKey
       description: An API key issued by server
       name: ApiKey
