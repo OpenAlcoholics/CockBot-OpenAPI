@@ -5,7 +5,7 @@ info:
   license:
     name: MIT license
 security:
-  - ApiKey
+  - ApiKey: []
 paths:
   /version:
     get:
