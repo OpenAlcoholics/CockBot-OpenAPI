@@ -918,4 +918,5 @@ components:
     Token:
       type: http
       scheme: bearer
-      description: A bearer token with no specific format.
+      description: A jwt bearer token.
+      bearerFormat: jwt
