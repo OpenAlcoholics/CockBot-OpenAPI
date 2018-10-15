@@ -1,0 +1,1057 @@
+openapi: 3.0.1
+info:
+  title: OpenCocktail API
+  version: 0.1.0
+  license:
+    name: MIT license
+    url: 'https://opensource.org/licenses/MIT'
+security:
+  - Token: []
+paths:
+  /version:
+    get:
+      summary: OpenCocktail version
+      description: The version of the OpenCocktail database backend.
+      operationId: getVersion
+      security: []
+      responses:
+        200:
+          description: Information about the implemented API version and the implementation.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Version'
+
+  /cocktail:
+    post:
+      summary: Insert a new cocktail
+      operationId: insertCocktail
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Cocktail'
+      responses:
+        201:
+          description: The created cocktail.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cocktail'
+        401:
+          $ref: '#/components/responses/Unauthenticated'
+        403:
+          $ref: '#/components/responses/Unauthorized'
+    get:
+      summary: Search for a cocktail
+      operationId: searchCocktail
+      parameters:
+        - name: q
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: category
+          description: A cocktail category ID.
+          in: query
+          required: false
+          schema:
+            type: integer
+      responses:
+        200:
+          description: A list of matching cocktails.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Cocktail'
+        401:
+          $ref: '#/components/responses/Unauthenticated'
+  /cocktail/{id}:
+    parameters:
+      - name: id
+        description: The ID of a cocktail.
+        in: path
+        required: true
+        schema:
+          type: integer
+    get:
+      summary: Get a cocktail by its ID
+      operationId: getCocktail
+      responses:
+        200:
+          description: The requested cocktail.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Cocktail"
+        401:
+          $ref: '#/components/responses/Unauthenticated'
+        404:
+          $ref: "#/components/responses/NotFound"
+    put:
+      summary: Update a cocktail
+      operationId: updateCocktail
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Cocktail'
+      responses:
+        200:
+          description: The updated cocktail.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cocktail'
+        401:
+          $ref: '#/components/responses/Unauthenticated'
+        403:
+          $ref: '#/components/responses/Unauthorized'
+        404:
+          $ref: "#/components/responses/NotFound"
+    delete:
+      summary: Delete a cocktail
+      operationId: deleteCocktail
+      responses:
+        204:
+          description: Sucessfully deleted.
+        401:
+          $ref: '#/components/responses/Unauthenticated'
+        403:
+          $ref: '#/components/responses/Unauthorized'
+        404:
+          $ref: "#/components/responses/NotFound"
+
+  /cocktail/category:
+    post:
+      summary: Insert a new cocktail category
+      operationId: insertCocktailCategory
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CocktailCategory'
+      responses:
+        201:
+          description: The created cocktail category.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CocktailCategory'
+        401:
+          $ref: '#/components/responses/Unauthenticated'
+        403:
+          $ref: '#/components/responses/Unauthorized'
+    get:
+      summary: Search for a cocktail category
+      operationId: searchCocktailCategory
+      parameters:
+        - name: q
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: A list of matching cocktail categories.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CocktailCategory'
+        401:
+          $ref: '#/components/responses/Unauthenticated'
+  /cocktail/category/{id}:
+    parameters:
+      - name: id
+        description: The ID of a cocktail category.
+        in: path
+        required: true
+        schema:
+          type: integer
+    get:
+      summary: Get a cocktail category by its ID
+      operationId: getCocktailCategory
+      responses:
+        200:
+          description: The requested cocktail category.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CocktailCategory"
+        401:
+          $ref: '#/components/responses/Unauthenticated'
+        404:
+          $ref: "#/components/responses/NotFound"
+    put:
+      summary: Update a cocktail category
+      operationId: updateCocktailCategory
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CocktailCategory'
+      responses:
+        200:
+          description: The updated cocktail category.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CocktailCategory'
+        401:
+          $ref: '#/components/responses/Unauthenticated'
+        403:
+          $ref: '#/components/responses/Unauthorized'
+        404:
+          $ref: "#/components/responses/NotFound"
+    delete:
+      summary: Delete a cocktail category
+      operationId: deleteCocktailCategory
+      responses:
+        204:
+          description: Sucessfully deleted.
+        401:
+          $ref: '#/components/responses/Unauthenticated'
+        403:
+          $ref: '#/components/responses/Unauthorized'
+        404:
+          $ref: "#/components/responses/NotFound"
+
+  /ingredient:
+    post:
+      summary: Insert a new ingredient
+      operationId: insertIngredient
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Ingredient'
+      responses:
+        201:
+          description: The created ingredient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Ingredient'
+        401:
+          $ref: '#/components/responses/Unauthenticated'
+        403:
+          $ref: '#/components/responses/Unauthorized'
+    get:
+      summary: Search for an ingredient
+      operationId: searchIngredient
+      parameters:
+        - name: q
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: category
+          description: An ingredient category ID.
+          in: query
+          required: false
+          schema:
+            type: integer
+      responses:
+        200:
+          description: A list of matching ingredients.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Ingredient'
+        401:
+          $ref: '#/components/responses/Unauthenticated'
+  /ingredient/{id}:
+    parameters:
+      - name: id
+        description: The ID of an ingredient.
+        in: path
+        required: true
+        schema:
+          type: integer
+    get:
+      summary: Get an ingredient by its ID
+      operationId: getIngredient
+      responses:
+        200:
+          description: The requested ingredient.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Ingredient"
+        401:
+          $ref: '#/components/responses/Unauthenticated'
+        404:
+          $ref: "#/components/responses/NotFound"
+    put:
+      summary: Update an ingredient
+      operationId: updateIngredient
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Ingredient'
+      responses:
+        200:
+          description: The updated ingredient.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Ingredient'
+        401:
+          $ref: '#/components/responses/Unauthenticated'
+        403:
+          $ref: '#/components/responses/Unauthorized'
+        404:
+          $ref: "#/components/responses/NotFound"
+    delete:
+      summary: Delete an ingredient
+      operationId: deleteIngredient
+      responses:
+        204:
+          description: Sucessfully deleted.
+        401:
+          $ref: '#/components/responses/Unauthenticated'
+        403:
+          $ref: '#/components/responses/Unauthorized'
+        404:
+          $ref: "#/components/responses/NotFound"
+
+  /ingredient/category:
+    post:
+      summary: Insert a new ingredient category
+      operationId: insertIngredientCategory
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IngredientCategory'
+      responses:
+        201:
+          description: The created ingredient category.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IngredientCategory'
+        401:
+          $ref: '#/components/responses/Unauthenticated'
+        403:
+          $ref: '#/components/responses/Unauthorized'
+    get:
+      summary: Search for an ingredient category
+      operationId: searchIngredientCategory
+      parameters:
+        - name: q
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: A list of matching ingredient categories.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/IngredientCategory'
+        401:
+          $ref: '#/components/responses/Unauthenticated'
+  /ingredient/category/{id}:
+    parameters:
+      - name: id
+        description: The ID of an ingredient category.
+        in: path
+        required: true
+        schema:
+          type: integer
+    get:
+      summary: Get an ingredient category by its ID
+      operationId: getIngredientCategory
+      responses:
+        200:
+          description: The requested ingredient category.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/IngredientCategory"
+        401:
+          $ref: '#/components/responses/Unauthenticated'
+        404:
+          $ref: "#/components/responses/NotFound"
+    put:
+      summary: Update an ingredient category
+      operationId: updateIngredientCategory
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IngredientCategory'
+      responses:
+        200:
+          description: The updated ingredient category.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IngredientCategory'
+        401:
+          $ref: '#/components/responses/Unauthenticated'
+        403:
+          $ref: '#/components/responses/Unauthorized'
+        404:
+          $ref: "#/components/responses/NotFound"
+    delete:
+      summary: Delete an ingredient category
+      operationId: deleteIngredientCategory
+      responses:
+        204:
+          description: Sucessfully deleted.
+        401:
+          $ref: '#/components/responses/Unauthenticated'
+        403:
+          $ref: '#/components/responses/Unauthorized'
+        404:
+          $ref: "#/components/responses/NotFound"
+
+  /accessory:
+    post:
+      summary: Insert a new accessory
+      operationId: insertAccessory
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Accessory'
+      responses:
+        201:
+          description: The created accessory.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Accessory'
+        401:
+          $ref: '#/components/responses/Unauthenticated'
+        403:
+          $ref: '#/components/responses/Unauthorized'
+    get:
+      summary: Search for an accessory
+      operationId: searchAccessory
+      parameters:
+        - name: q
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: category
+          description: An accessory category ID.
+          in: query
+          required: false
+          schema:
+            type: integer
+      responses:
+        200:
+          description: A list of matching accessories
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Accessory'
+        401:
+          $ref: '#/components/responses/Unauthenticated'
+  /accessory/{id}:
+    parameters:
+      - name: id
+        description: The ID of an accessory.
+        in: path
+        required: true
+        schema:
+          type: integer
+    get:
+      summary: Get an accessory by its ID
+      operationId: getAccessory
+      responses:
+        200:
+          description: The requested accessory.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Accessory"
+        401:
+          $ref: '#/components/responses/Unauthenticated'
+        404:
+          $ref: "#/components/responses/NotFound"
+    put:
+      summary: Update an accessory
+      operationId: updateAccessory
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Accessory'
+      responses:
+        200:
+          description: The updated accessory.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Accessory'
+        401:
+          $ref: '#/components/responses/Unauthenticated'
+        403:
+          $ref: '#/components/responses/Unauthorized'
+        404:
+          $ref: "#/components/responses/NotFound"
+    delete:
+      summary: Delete an accessory
+      operationId: deleteAccessory
+      responses:
+        204:
+          description: Sucessfully deleted.
+        401:
+          $ref: '#/components/responses/Unauthenticated'
+        403:
+          $ref: '#/components/responses/Unauthorized'
+        404:
+          $ref: "#/components/responses/NotFound"
+
+  /accessory/category:
+    post:
+      summary: Insert a new accessory category
+      operationId: insertAccessoryCategory
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AccessoryCategory'
+      responses:
+        201:
+          description: The created accessory category.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessoryCategory'
+        401:
+          $ref: '#/components/responses/Unauthenticated'
+        403:
+          $ref: '#/components/responses/Unauthorized'
+    get:
+      summary: Search for an accessory category
+      operationId: searchAccessoryCategory
+      parameters:
+        - name: q
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: A list of matching accessory categories.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AccessoryCategory'
+        401:
+          $ref: '#/components/responses/Unauthenticated'
+  /accessory/category/{id}:
+    parameters:
+      - name: id
+        description: The ID of an accessory category.
+        in: path
+        required: true
+        schema:
+          type: integer
+    get:
+      summary: Get an accessory category by its ID
+      operationId: getAccessoryCategory
+      responses:
+        200:
+          description: The requested accessory category.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AccessoryCategory"
+        401:
+          $ref: '#/components/responses/Unauthenticated'
+        404:
+          $ref: "#/components/responses/NotFound"
+    put:
+      summary: Update an accessory category
+      operationId: updateAccessoryCategory
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AccessoryCategory'
+      responses:
+        200:
+          description: The updated accessory category.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessoryCategory'
+        401:
+          $ref: '#/components/responses/Unauthenticated'
+        403:
+          $ref: '#/components/responses/Unauthorized'
+        404:
+          $ref: "#/components/responses/NotFound"
+    delete:
+      summary: Delete an accessory category
+      operationId: deleteAccessoryCategory
+      responses:
+        204:
+          description: Sucessfully deleted.
+        404:
+          $ref: "#/components/responses/NotFound"
+
+  /glass:
+    post:
+      summary: Insert a new glass
+      operationId: insertGlass
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Glass'
+      responses:
+        201:
+          description: The created glass.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Glass'
+        401:
+          $ref: '#/components/responses/Unauthenticated'
+        403:
+          $ref: '#/components/responses/Unauthorized'
+    get:
+      summary: Search for a glass
+      operationId: searchGlass
+      parameters:
+        - name: q
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: A list of matching glasses.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Glass'
+        401:
+          $ref: '#/components/responses/Unauthenticated'
+  /glass/{id}:
+    parameters:
+      - name: id
+        description: The ID of a glass.
+        in: path
+        required: true
+        schema:
+          type: integer
+    get:
+      summary: Get a glass by its ID
+      operationId: getGlass
+      responses:
+        200:
+          description: The requested glass.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Glass"
+        401:
+          $ref: '#/components/responses/Unauthenticated'
+        404:
+          $ref: "#/components/responses/NotFound"
+    put:
+      summary: Update a glass
+      operationId: updateGlass
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Glass'
+      responses:
+        200:
+          description: The updated glass.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Glass'
+        401:
+          $ref: '#/components/responses/Unauthenticated'
+        403:
+          $ref: '#/components/responses/Unauthorized'
+        404:
+          $ref: "#/components/responses/NotFound"
+    delete:
+      summary: Delete a glass
+      operationId: deleteGlass
+      responses:
+        204:
+          description: Sucessfully deleted.
+        401:
+          $ref: '#/components/responses/Unauthenticated'
+        403:
+          $ref: '#/components/responses/Unauthorized'
+        404:
+          $ref: "#/components/responses/NotFound"
+
+components:
+  schemas:
+    Version:
+      description: Describes the server version.
+      type: object
+      required:
+        - apiVersion
+        - implementation
+      properties:
+        apiVersion:
+          example: 1.0.0
+          description: The API version.
+          type: string
+        implementation:
+          $ref: "#/components/schemas/ImplementationInfo"
+    ImplementationInfo:
+      description: Information about the implementation serving the API.
+      type: object
+      required:
+        - name
+        - version
+      properties:
+        name:
+          description: The name of the server implementation.
+          example: CocktailParty
+          type: string
+        version:
+          description: The version of the implementation.
+          example: 1.0.0
+          type: string
+        projectInfo:
+          description: URL to the project website.
+          example: https://github.com/OpenAlcoholics/CocktailParty
+          type: string
+    Cocktail:
+      description: Information about a cocktail and its recipe.
+      type: object
+      required:
+        - name
+        - description
+        - ingredients
+        - accessories
+        - category
+        - glass
+      properties:
+        id:
+          description: The cocktail ID.
+          example: 42
+          type: integer
+        name:
+          description: The name of the cocktail.
+          example: Tequila Sunrise
+          type: string
+        description:
+          description: A description of the cocktail.
+          example: Resembles a beautiful sunrise
+          type: string
+        ingredients:
+          description: >
+            A list of ingredient ID lists. If a list contains multiple ingredient IDs,
+            they can be poured simultaneously.
+          type: array
+          items:
+            type: array
+            items:
+              $ref: "#/components/schemas/CocktailIngredient"
+        accessories:
+          description: A list of accessories that might be applied to the cocktail.
+          type: array
+          items:
+            $ref: "#/components/schemas/CocktailAccessory"
+        category:
+          $ref: "#/components/schemas/CocktailCategory"
+        glass:
+          $ref: "#/components/schemas/Glass"
+        imageLink:
+          description: A link to an image of the cocktail.
+          example: https://exampleimage.link
+          type: string
+          nullable: true
+        revisionDate:
+          description: The time of the latest update to the recipe as a unix timestamp.
+          type: integer
+          format: int64
+        notes:
+          description: Arbitrary notes on the cocktail.
+          example: This is a note on a cocktail
+          type: string
+    CocktailCategory:
+      description: A cocktail category.
+      type: object
+      required:
+        - name
+        - description
+      properties:
+        id:
+          description: The category ID.
+          example: 123
+          type: integer
+        name:
+          description: The name of the category.
+          example: Basics
+          type: string
+        description:
+          description: The description for the category.
+          example: Cocktails everybody knows
+          type: string
+        imageLink:
+          description: A link to an image representing the category.
+          example: https://exampleimage.link
+          type: string
+          nullable: true
+    CocktailIngredient:
+      description: The relation of an ingredient to a cocktail.
+      type: object
+      required:
+        - ingredientId
+        - share
+      properties:
+        ingredientId:
+          description: The ingredient ID.
+          example: 123
+          type: integer
+        share:
+          description: The share (in percent) of the ingredient in a cocktail.
+          example: 40
+          type: integer
+          format: int32
+          minimum: 0
+          maximum: 100
+    Ingredient:
+      description: A liquid ingredient of a cocktail.
+      type: object
+      required:
+        - name
+        - alcoholPercentage
+        - category
+      properties:
+        id:
+          description: The ingredient ID.
+          example: 123
+          type: integer
+        name:
+          description: The name of the ingredient.
+          example: Sierra Silver Tequila
+          type: string
+        imageLink:
+          description: A link to an image of the ingredient.
+          example: https://exampleimage.link
+          type: string
+          nullable: true
+        alcoholPercentage:
+          description: The percentage of alcohol content in the ingredient.
+          example: 38
+          type: integer
+          format: int32
+        category:
+          "$ref": "#/components/schemas/IngredientCategory"
+        notes:
+          description: Arbitrary notes on the ingredient.
+          example: This is a note on an ingredient
+          type: string
+    IngredientCategory:
+      description: An ingredient category.
+      type: object
+      required:
+        - name
+        - alcoholic
+      properties:
+        id:
+          description: The category ID.
+          example: 123
+          type: integer
+        name:
+          description: The name of the category.
+          example: Tequila
+          type: string
+        description:
+          description: A description of the category.
+          example: It's tequila.
+          type: string
+        alcoholic:
+          description: Whether ingredients of this category contain alcohol.
+          example: true
+          type: boolean
+        imageLink:
+          description: A link to an image representing the category.
+          example: https://exampleimage.link
+          type: string
+          nullable: true
+    CocktailAccessory:
+      description: The relation of an accessory to a cocktail.
+      type: object
+      required:
+        - accessoryId
+        - pieces
+      properties:
+        accessoryId:
+          description: The accessory ID.
+          example: 123
+          type: integer
+        pieces:
+          description: The suggested amount of pieces of this accessory in a cocktail.
+          example: 1
+          type: integer
+          format: int32
+          minimum: 0
+    Accessory:
+      description: A manually applied accessory for a cocktail.
+      type: object
+      required:
+        - name
+        - description
+        - category
+      properties:
+        id:
+          description: The accessory ID.
+          example: 123
+          type: integer
+        name:
+          description: The name of the accessory.
+          example: Cocktail umbrella
+          type: string
+        description:
+          description: The description of the accessory.
+          example: It's a cocktail umbrella.
+          type: string
+        imageLink:
+          description: A link to an image of the accessory.
+          example: https://exampleimage.link
+          type: string
+          nullable: true
+        category:
+          "$ref": "#/components/schemas/AccessoryCategory"
+    AccessoryCategory:
+      description: An accessory category.
+      type: object
+      required:
+        - name
+        - description
+        - alcoholic
+      properties:
+        id:
+          description: The category ID.
+          example: 123
+          type: integer
+        name:
+          description: The name of the category.
+          example: Inedibles
+          type: string
+        description:
+          description: A description of the category.
+          example: Don't put it in your mouth.
+          type: string
+        imageLink:
+          description: A link to an image representing the category.
+          example: https://exampleimage.link
+          type: string
+          nullable: true
+    Glass:
+      description: A type of cocktail glass.
+      type: object
+      required:
+        - name
+        - estimatedSize
+      properties:
+        id:
+          description: The glass ID.
+          example: 123
+          type: integer
+        name:
+          description: The name of the glass type.
+          example: Collins glass
+          type: string
+        estimatedSize:
+          description: Typical glass size in milliliters.
+          example: 400
+          type: integer
+          format: int32
+        imageLink:
+          description: A link to an image of the type of glass.
+          example: https://exampleimage.link
+          type: string
+          nullable: true
+    AuthExpectation:
+      description: Defines authentication/authorization expectations for an endpoint.
+      type: object
+      required:
+        - permissions
+      properties:
+        permissions:
+          description: >
+            Required permissions for the endpoint.
+          type: array
+          items:
+            type: string
+
+  responses:
+    NotFound:
+      description: The cocktail does not exist.
+      content:
+        application/json:
+          schema:
+            example: Not found
+            type: string
+    SemanticError:
+      description: The request contained semantic errors.
+      content:
+        application/json:
+          schema:
+            example: Unprocessable Entity
+            type: string
+    Unauthenticated:
+      description: >
+        The called endpoint requires authentication, which was not provided.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AuthExpectation'
+    Unauthorized:
+      description: >
+        The called endpoint has specific permission requirements, which were not met.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AuthExpectation'
+
+  securitySchemes:
+    Token:
+      type: http
+      scheme: bearer
+      description: A JWT bearer token. The payload contains a permissions key with a string-array payload.
+      bearerFormat: jwt
