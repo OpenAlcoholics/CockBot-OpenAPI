@@ -1009,8 +1009,6 @@ components:
     AuthExpectation:
       description: Defines authentication/authorization expectations for an endpoint.
       type: object
-      required:
-        - permissions
       properties:
         permissions:
           description: >
