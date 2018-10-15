@@ -1012,7 +1012,7 @@ components:
       properties:
         permissions:
           description: >
-            Required permissions for the endpoint.
+            Required permissions for the endpoint. Might be missing for 401 responses.
           type: array
           items:
             type: string
