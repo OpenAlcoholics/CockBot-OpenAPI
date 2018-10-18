@@ -1076,4 +1076,4 @@ components:
       in: header
       name: AdminKey
       description: >
-        Log in with a fixed API key.
+        Log in with a fixed API key. The key must be Base64-encoded.
