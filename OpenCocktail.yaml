@@ -22,6 +22,24 @@ paths:
               schema:
                 $ref: '#/components/schemas/Version'
 
+  /login:
+    get:
+      description: (Temporary) log in as admin with a fixed API key.
+      operationId: adminLogin
+      security:
+        - Admin: []
+      responses:
+        200:
+          description: A bearer token.
+          content:
+            text/plain:
+              schema:
+                type: string
+        401:
+          description: Missing API key.
+        403:
+          description: Wrong API key.
+
   /cocktail:
     post:
       summary: Insert a new cocktail
@@ -1053,3 +1071,9 @@ components:
       scheme: bearer
       description: A JWT bearer token. The payload contains a permissions key with a string-array payload.
       bearerFormat: jwt
+    Admin:
+      type: apiKey
+      in: header
+      name: AdminKey
+      description: >
+        Log in with a fixed API key.
