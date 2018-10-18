@@ -10,8 +10,8 @@ jobs:
             name: Replace password in .circleci/flyway.conf
             command: sed -i -e "s/{{password}}/${OPENCOCKTAIL_CIRCLECI_PASSWORD}/g" .circleci/flyway.conf
         - run:
-            name: Replace password in .circleci/flyway.conf
+            name: Replace base url in .circleci/flyway.conf
             command: sed -i -e "s/{{base_url}}/${OPENCOCKTAIL_CIRCLECI_BASE_URL}/g" .circleci/flyway.conf
         - run:
             name: Execute migration
-            command: flyway -X -configFiles=.circleci/flyway.conf  migrate
+            command: flyway -X -configFiles=.circleci/flyway.conf migrate
