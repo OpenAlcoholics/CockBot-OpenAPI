@@ -29,6 +29,17 @@ jobs:
 workflows:
   version: 2
   do_everything:
+
     jobs:
-      - migrate
-      - build_docs
+        - migrate:
+            filters:
+                branches:
+                only:
+                    - master
+                    - develop
+        - build_docs:
+            filters:
+                branches:
+                only:
+                    - master
+                    - develop
