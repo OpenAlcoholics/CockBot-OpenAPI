@@ -40,12 +40,12 @@ workflows:
         - migrate:
             filters:
                 branches:
-                only:
-                    - master
-                    - develop
+                    only:
+                        - master
+                        - develop
         - build_docs:
             filters:
                 branches:
-                only:
-                    - master
-                    - develop
+                    only:
+                        - master
+                        - develop
