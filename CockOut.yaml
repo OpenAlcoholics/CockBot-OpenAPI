@@ -1,0 +1,280 @@
+openapi: 3.0.1
+info:
+  title: CockOut API
+  version: 0.1.0
+  license:
+    name: MIT license
+    url: 'https://opensource.org/licenses/MIT'
+  contact:
+    name: API Support
+    url: https://github.com/OpenAlcoholics/CockBot-OpenAPI/issues
+    email: felixclemensgail@gmail.com
+paths:
+  /version:
+    get:
+      summary: CockOut version
+      description: The version of the CockOut implementation.
+      operationId: getVersion
+      security: []
+      responses:
+        200:
+          description: Information about the implemented API version and the implementation.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Version'
+  /assign:
+    post:
+      summary: Assign drinkables to pumps
+      description: >
+        Accepts a list of drinkables, ordered after usage in cocktails, and assigns them to pumps
+      operationId: assignDrinkables
+      requestBody:
+          required: true
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Drinkable'
+      responses:
+        200:
+          description: List of Position with assigned drinkables
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Position'
+        405:
+          description: Bad Request
+    get:
+      summary: Get Pump Configuration
+      operationId: getDrinkables
+      responses:
+        200:
+          description: List of Position with assigned drinkables
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Position'
+  /assign/{position}:
+    parameters:
+      - name: position
+        description: The position of a pump/drinkable.
+        in: path
+        required: true
+        schema:
+          type: integer
+    post:
+      summary: Update a single position
+      operationId: assignDrinkable
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Drinkable'
+      responses:
+        200:
+          description: Position successfully updated
+          content:
+            application/json:
+                schema:
+                  $ref: '#/components/schemas/Position'
+        404:
+          $ref: '#/components/responses/NotFound'
+    get:
+      summary: Get Information about a single position.
+      responses:
+        200:
+          description: Information about a specific position
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Position'
+        404:
+          $ref: '#/components/responses/NotFound'
+  /cocktail:
+    post:
+      summary: Mix a cocktail
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Cocktail'
+      responses:
+        200:
+          description: Cocktail is being processed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Task'
+
+  /status:
+    get:
+      summary: Get all current tasks
+      responses:
+        200:
+          description: List of current tasks
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Task'
+  /status/{reference}:
+    parameters:
+      - name: reference
+        description: Reference to a task.
+        in: path
+        required: true
+        schema:
+          type: string
+
+    get:
+      summary: Information about a task
+      responses:
+        200:
+          description: Task information
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Task'
+        404:
+          $ref: '#/components/responses/NotFound'
+
+components:
+  schemas:
+    Version:
+      description: Describes the server version.
+      type: object
+      required:
+      - apiVersion
+      - implementation
+      properties:
+        apiVersion:
+          example: 1.0.0
+          description: The API version.
+          type: string
+        implementation:
+          $ref: "#/components/schemas/ImplementationInfo"
+    ImplementationInfo:
+      description: Information about the implementation serving the API.
+      type: object
+      required:
+      - name
+      - version
+      properties:
+        name:
+          description: The name of the server implementation.
+          example: CockOut
+          type: string
+        version:
+          description: The version of the implementation.
+          example: 1.0.0
+          type: string
+    Position:
+      description: Information about a pump position
+      type: object
+      required:
+      - position
+      properties:
+        position:
+          description: Position of the pump
+          example: 42
+          type: integer
+        throughput:
+          description: estimated throughput of the pump in ml/min
+          example: 200
+          type: integer
+        drinkable:
+          $ref: '#/components/schemas/Position'
+
+    Drinkable:
+      description: A liquid Igredient that can be assigned to a pump
+      type: object
+      required:
+        - ingredientId
+      properties:
+        ingredientId:
+          description: Ingredient ID of the drinkable
+          type: integer
+          example: 42
+        amount:
+          description: Amount of liquid in the container (in ml). Defaults to 750ml.
+          type: integer
+          example: 750
+    Task:
+      description: A task, created when a cocktail is being processed
+      type: object
+      required:
+        - reference
+        - status
+      properties:
+        reference:
+          description: A UUID to reference the taks
+          type: string
+          example: c4c0a6b7-6abc-4db9-a3c5-3b278fcd5107
+        status:
+          description: Status of the task
+          type: string
+          example: completed
+        completionTime:
+          description: Estimated system time at completion
+          type: integer
+          example: 1539981501224
+    Cocktail:
+      description: A Cocktail recipe
+      type: object
+      required:
+        - id
+        - ingredients
+        - size
+      properties:
+        id:
+          description: A Cocktail ID in order to reconstruct the request
+          type: integer
+          example: 42
+        ingredients:
+          description: >
+            A list of ingredient ID lists. If a list contains multiple ingredient IDs,
+            they can be poured simultaneously.
+          type: array
+          items:
+            type: array
+            items:
+              $ref: "#/components/schemas/CocktailIngredient"
+        size:
+          description: Cocktail size in milliliters
+          type: integer
+          example: 400
+    CocktailIngredient:
+      description: The relation of an ingredient to a cocktail.
+      type: object
+      required:
+        - ingredientId
+        - share
+      properties:
+        ingredientId:
+          description: The ingredient ID.
+          example: 123
+          type: integer
+        share:
+          description: The share (in percent) of the ingredient in a cocktail.
+          example: 40
+          type: integer
+          format: int32
+          minimum: 0
+          maximum: 100
+  responses:
+    NotFound:
+      description: The resource does not exist.
+      content:
+        application/json:
+          schema:
+            example: Not found
+            type: string
