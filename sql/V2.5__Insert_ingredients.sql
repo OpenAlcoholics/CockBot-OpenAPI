@@ -42,3 +42,12 @@ VALUES (
 	37,
 	(SELECT id FROM ingredient_categories WHERE ingredient_categories.name = 'Vodka')
 );
+
+INSERT INTO ingredients (name, image_link, notes, alcohol_percentage, category_id)
+VALUES (
+	'Tequila',
+	'TODO',
+	'TODO',
+	37,
+	(SELECT id FROM ingredient_categories WHERE ingredient_categories.name = 'Vodka')
+);

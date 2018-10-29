@@ -13,3 +13,35 @@ VALUES (
 	'',
 	(SELECT id FROM accessories_categories WHERE accessories_categories.name = 'Lemon')
 );
+
+INSERT INTO accessories (name, description, image_link, category_id)
+VALUES (
+	'Orange Slice',
+	'Slice of an orange',
+	'',
+	(SELECT id FROM accessories_categories WHERE accessories_categories.name = 'Citrus')
+);
+
+INSERT INTO accessories (name, description, image_link, category_id)
+VALUES (
+	'White sugar',
+	'...',
+	'',
+	(SELECT id FROM accessories_categories WHERE accessories_categories.name = 'Sugar')
+);
+
+INSERT INTO accessories (name, description, image_link, category_id)
+VALUES (
+	'Brown sugar',
+	'...',
+	'',
+	(SELECT id FROM accessories_categories WHERE accessories_categories.name = 'Sugar')
+);
+
+INSERT INTO accessories (name, description, image_link, category_id)
+VALUES (
+	'Mint leaves',
+	'...',
+	'',
+	(SELECT id FROM accessories_categories WHERE accessories_categories.name = 'Herbs')
+);

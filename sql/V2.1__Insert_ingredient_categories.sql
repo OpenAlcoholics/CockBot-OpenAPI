@@ -45,3 +45,19 @@ VALUES (
 	'TODO',
 	false
 );
+
+INSERT INTO ingredient_categories (name, description, image_link, is_alcoholic)
+VALUES (
+	'Soda',
+	'TODO',
+	'TODO',
+	false
+);
+
+INSERT INTO ingredient_categories (name, description, image_link, is_alcoholic)
+VALUES (
+	'Tequila',
+	'TODO',
+	'TODO',
+	false
+);
