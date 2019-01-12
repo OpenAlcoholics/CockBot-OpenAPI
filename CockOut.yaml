@@ -238,6 +238,9 @@ components:
           description: estimated throughput of the pump in ml/min
           example: 200
           type: integer
+        description:
+          description: Optional pump description
+          type: string
         ingredient:
           $ref: '#/components/schemas/Ingredient'
 
