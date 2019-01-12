@@ -7,9 +7,28 @@ info:
     url: 'https://opensource.org/licenses/MIT'
 security:
   - Token: []
+tags:
+  - name: Info,
+    description: General info about the server
+  - name: Auth
+    description: Auth related operations
+  - name: Cocktail
+    description: Operations on cocktails
+  - name: IngredientCategory
+    description: Operations on ingredient categories
+  - name: Ingredient
+    description: Operations on ingredients
+  - name: Accessory
+    description: Operations on accessories
+  - name: AccessoryCategory
+    description: Operations on accessory categories
+  - name: Glass
+    description: Operations on glasses
+
 paths:
   /version:
     get:
+      tags: [Info]
       summary: OpenCocktail version
       description: The version of the OpenCocktail database backend.
       operationId: getVersion
@@ -24,6 +43,7 @@ paths:
 
   /login:
     get:
+      tags: [Auth]
       description: (Temporary) log in as admin with a fixed API key.
       operationId: adminLogin
       security:
@@ -42,6 +62,7 @@ paths:
 
   /cocktail:
     post:
+      tags: [Cocktail]
       summary: Insert a new cocktail
       operationId: insertCocktail
       requestBody:
@@ -62,6 +83,7 @@ paths:
         403:
           $ref: '#/components/responses/Unauthorized'
     get:
+      tags: [Cocktail]
       summary: Search for a cocktail
       operationId: searchCocktail
       parameters:
@@ -96,6 +118,7 @@ paths:
         schema:
           type: integer
     get:
+      tags: [Cocktail]
       summary: Get a cocktail by its ID
       operationId: getCocktail
       responses:
@@ -110,6 +133,7 @@ paths:
         404:
           $ref: "#/components/responses/NotFound"
     put:
+      tags: [Cocktail]
       summary: Update a cocktail
       operationId: updateCocktail
       requestBody:
@@ -132,6 +156,7 @@ paths:
         404:
           $ref: "#/components/responses/NotFound"
     delete:
+      tags: [Cocktail]
       summary: Delete a cocktail
       operationId: deleteCocktail
       responses:
@@ -146,6 +171,7 @@ paths:
 
   /cocktail/category:
     post:
+      tags: [CocktailCategory]
       summary: Insert a new cocktail category
       operationId: insertCocktailCategory
       requestBody:
@@ -166,6 +192,7 @@ paths:
         403:
           $ref: '#/components/responses/Unauthorized'
     get:
+      tags: [CocktailCategory]
       summary: Search for a cocktail category
       operationId: searchCocktailCategory
       parameters:
@@ -194,6 +221,7 @@ paths:
         schema:
           type: integer
     get:
+      tags: [CocktailCategory]
       summary: Get a cocktail category by its ID
       operationId: getCocktailCategory
       responses:
@@ -208,6 +236,7 @@ paths:
         404:
           $ref: "#/components/responses/NotFound"
     put:
+      tags: [CocktailCategory]
       summary: Update a cocktail category
       operationId: updateCocktailCategory
       requestBody:
@@ -230,6 +259,7 @@ paths:
         404:
           $ref: "#/components/responses/NotFound"
     delete:
+      tags: [CocktailCategory]
       summary: Delete a cocktail category
       operationId: deleteCocktailCategory
       responses:
@@ -244,6 +274,7 @@ paths:
 
   /ingredient:
     post:
+      tags: [Ingredient]
       summary: Insert a new ingredient
       operationId: insertIngredient
       requestBody:
@@ -264,6 +295,7 @@ paths:
         403:
           $ref: '#/components/responses/Unauthorized'
     get:
+      tags: [Ingredient]
       summary: Search for an ingredient
       operationId: searchIngredient
       parameters:
@@ -298,6 +330,7 @@ paths:
         schema:
           type: integer
     get:
+      tags: [Ingredient]
       summary: Get an ingredient by its ID
       operationId: getIngredient
       responses:
@@ -312,6 +345,7 @@ paths:
         404:
           $ref: "#/components/responses/NotFound"
     put:
+      tags: [Ingredient]
       summary: Update an ingredient
       operationId: updateIngredient
       requestBody:
@@ -334,6 +368,7 @@ paths:
         404:
           $ref: "#/components/responses/NotFound"
     delete:
+      tags: [Ingredient]
       summary: Delete an ingredient
       operationId: deleteIngredient
       responses:
@@ -348,6 +383,7 @@ paths:
 
   /ingredient/category:
     post:
+      tags: [IngredientCategory]
       summary: Insert a new ingredient category
       operationId: insertIngredientCategory
       requestBody:
@@ -368,6 +404,7 @@ paths:
         403:
           $ref: '#/components/responses/Unauthorized'
     get:
+      tags: [IngredientCategory]
       summary: Search for an ingredient category
       operationId: searchIngredientCategory
       parameters:
@@ -396,6 +433,7 @@ paths:
         schema:
           type: integer
     get:
+      tags: [IngredientCategory]
       summary: Get an ingredient category by its ID
       operationId: getIngredientCategory
       responses:
@@ -410,6 +448,7 @@ paths:
         404:
           $ref: "#/components/responses/NotFound"
     put:
+      tags: [IngredientCategory]
       summary: Update an ingredient category
       operationId: updateIngredientCategory
       requestBody:
@@ -432,6 +471,7 @@ paths:
         404:
           $ref: "#/components/responses/NotFound"
     delete:
+      tags: [IngredientCategory]
       summary: Delete an ingredient category
       operationId: deleteIngredientCategory
       responses:
@@ -446,6 +486,7 @@ paths:
 
   /accessory:
     post:
+      tags: [Accessory]
       summary: Insert a new accessory
       operationId: insertAccessory
       requestBody:
@@ -466,6 +507,7 @@ paths:
         403:
           $ref: '#/components/responses/Unauthorized'
     get:
+      tags: [Accessory]
       summary: Search for an accessory
       operationId: searchAccessory
       parameters:
@@ -500,6 +542,7 @@ paths:
         schema:
           type: integer
     get:
+      tags: [Accessory]
       summary: Get an accessory by its ID
       operationId: getAccessory
       responses:
@@ -514,6 +557,7 @@ paths:
         404:
           $ref: "#/components/responses/NotFound"
     put:
+      tags: [Accessory]
       summary: Update an accessory
       operationId: updateAccessory
       requestBody:
@@ -536,6 +580,7 @@ paths:
         404:
           $ref: "#/components/responses/NotFound"
     delete:
+      tags: [Accessory]
       summary: Delete an accessory
       operationId: deleteAccessory
       responses:
@@ -550,6 +595,7 @@ paths:
 
   /accessory/category:
     post:
+      tags: [AccessoryCategory]
       summary: Insert a new accessory category
       operationId: insertAccessoryCategory
       requestBody:
@@ -570,6 +616,7 @@ paths:
         403:
           $ref: '#/components/responses/Unauthorized'
     get:
+      tags: [AccessoryCategory]
       summary: Search for an accessory category
       operationId: searchAccessoryCategory
       parameters:
@@ -598,6 +645,7 @@ paths:
         schema:
           type: integer
     get:
+      tags: [AccessoryCategory]
       summary: Get an accessory category by its ID
       operationId: getAccessoryCategory
       responses:
@@ -612,6 +660,7 @@ paths:
         404:
           $ref: "#/components/responses/NotFound"
     put:
+      tags: [AccessoryCategory]
       summary: Update an accessory category
       operationId: updateAccessoryCategory
       requestBody:
@@ -634,6 +683,7 @@ paths:
         404:
           $ref: "#/components/responses/NotFound"
     delete:
+      tags: [AccessoryCategory]
       summary: Delete an accessory category
       operationId: deleteAccessoryCategory
       responses:
@@ -644,6 +694,7 @@ paths:
 
   /glass:
     post:
+      tags: [Glass]
       summary: Insert a new glass
       operationId: insertGlass
       requestBody:
@@ -664,6 +715,7 @@ paths:
         403:
           $ref: '#/components/responses/Unauthorized'
     get:
+      tags: [Glass]
       summary: Search for a glass
       operationId: searchGlass
       parameters:
@@ -692,6 +744,7 @@ paths:
         schema:
           type: integer
     get:
+      tags: [Glass]
       summary: Get a glass by its ID
       operationId: getGlass
       responses:
@@ -706,6 +759,7 @@ paths:
         404:
           $ref: "#/components/responses/NotFound"
     put:
+      tags: [Glass]
       summary: Update a glass
       operationId: updateGlass
       requestBody:
@@ -728,6 +782,7 @@ paths:
         404:
           $ref: "#/components/responses/NotFound"
     delete:
+      tags: [Glass]
       summary: Delete a glass
       operationId: deleteGlass
       responses:
@@ -799,7 +854,7 @@ components:
           type: string
         ingredients:
           description: >
-            A list of ingredient ID lists. If a list contains multiple ingredient IDs,
+            A list of lists of ingredients (see CocktailIngredient). If a list contains multiple items,
             they can be poured simultaneously.
           type: array
           items:
@@ -856,11 +911,11 @@ components:
       description: The relation of an ingredient to a cocktail.
       type: object
       required:
-        - ingredientId
+        - ingredientCategoryId
         - share
       properties:
-        ingredientId:
-          description: The ingredient ID.
+        ingredientCategoryId:
+          description: The ingredient category ID.
           example: 123
           type: integer
         share:
@@ -871,7 +926,7 @@ components:
           minimum: 0
           maximum: 100
     Ingredient:
-      description: A liquid ingredient of a cocktail.
+      description: A concrete liquid ingredient of a cocktail.
       type: object
       required:
         - name
@@ -903,7 +958,7 @@ components:
           example: This is a note on an ingredient
           type: string
     IngredientCategory:
-      description: An ingredient category.
+      description: A cocktail ingredient category (for example Gin, Vodka, Orange Juice, etc.).
       type: object
       required:
         - name
@@ -934,11 +989,11 @@ components:
       description: The relation of an accessory to a cocktail.
       type: object
       required:
-        - accessoryId
+        - accessoryCategoryId
         - pieces
       properties:
-        accessoryId:
-          description: The accessory ID.
+        accessoryCategoryId:
+          description: The accessory category ID.
           example: 123
           type: integer
         pieces:
