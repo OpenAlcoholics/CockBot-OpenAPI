@@ -288,18 +288,16 @@ components:
           type: integer
           minimum: 0
           maximum: 100
+        error_message:
+          description: Reason for failure. Only available if status is 'failure'.
+          type: string
     Cocktail:
       description: A Cocktail recipe
       type: object
       required:
-        - id
         - ingredients
         - size
       properties:
-        id:
-          description: A Cocktail ID in order to reconstruct the request
-          type: integer
-          example: 42
         ingredients:
           description: >
             A list of ingredient ID lists. If a list contains multiple ingredient IDs,
