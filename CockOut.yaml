@@ -12,6 +12,8 @@ info:
 paths:
   /version:
     get:
+      tags:
+        - setup
       summary: CockOut version
       description: The version of the CockOut implementation.
       operationId: getVersion
@@ -25,6 +27,9 @@ paths:
                 $ref: '#/components/schemas/Version'
   /ingredients:
     put:
+      tags:
+        - setup
+        - ingredient
       summary: Assign ingredients to pumps. Overrides an existing list
       description: >
         Accepts a list of ingredients, ordered after usage in cocktails, and assigns them to pumps
@@ -47,8 +52,15 @@ paths:
                 items:
                   $ref: '#/components/schemas/Position'
         422:
-          $ref: '#components/responses/Mesage'
+          description: Not enough pumps available.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
     get:
+      tags:
+        - setup
+        - ingredient
       summary: Get Pump Configuration
       operationId: getIngredients
       responses:
@@ -60,16 +72,19 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Position'
-  /assign/{position}:
+  /ingredient/{position}:
     parameters:
       - name: position
-        description: The position of a pump/ingredient.
+        description: The position of a pump.
         in: path
         required: true
         schema:
           type: integer
     put:
-      summary: Update a single position
+      tags:
+        - setup
+        - ingredient
+      summary: Replace the ingredient at a definit position
       operationId: assignIngredient
       requestBody:
         required: true
@@ -84,7 +99,31 @@ paths:
             application/json:
                 schema:
                   $ref: '#/components/schemas/Position'
+        404:
+          description: Position out of range
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+    delete:
+      tags:
+        - setup
+        - ingredient
+      summary: Delete a pump assignment
+      operationId: deleteIngredient
+      responses:
+        200:
+          description: successfully deleted pump assignment
+        404:
+          description: Position out of range
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
     get:
+      tags:
+        - setup
+        - ingredient
       summary: Get Information about a single position.
       responses:
         200:
@@ -93,8 +132,17 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Position'
+        404:
+          description: Position out of range
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
   /cocktail:
     post:
+      tags:
+        - use
+        - cocktail
       summary: Mix a cocktail
       requestBody:
         required: true
@@ -112,6 +160,9 @@ paths:
 
   /status:
     get:
+      tags:
+      - use
+      - status
       summary: Get all current tasks
       responses:
         200:
@@ -132,6 +183,9 @@ paths:
           type: string
 
     get:
+      tags:
+      - use
+      - status
       summary: Information about a task
       responses:
         200:
@@ -140,7 +194,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Task'
-
 components:
   schemas:
     Version:
@@ -275,11 +328,12 @@ components:
           format: int32
           minimum: 0
           maximum: 100
-  responses:
-    Message:
+    ErrorMessage:
       description: Error Mesage to the caller.
-      content:
-        application/json:
-          schema:
-            example: Unproccessable. More ingredients than pumps
-            type: string
+      type: object
+      required:
+        - message
+      properties:
+        message:
+          example: Unproccessable. More ingredients than pumps
+          type: string
