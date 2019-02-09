@@ -811,7 +811,7 @@ paths:
       parameters:
         - name: q
           in: query
-          required: true
+          required: false
           schema:
             type: string
         - name: limit
