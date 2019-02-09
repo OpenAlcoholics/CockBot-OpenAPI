@@ -98,6 +98,21 @@ paths:
           required: false
           schema:
             type: integer
+        - name: limit
+          description: The maximum size of the response.
+          in: query
+          required: false
+          schema:
+            type: integer
+            maximum: 40
+            minimum: 1
+        - name: offset
+          description: The offset of the first returned element.
+          in: query
+          required: false
+          schema:
+            type: integer
+            minimum: 0
       responses:
         200:
           description: A list of matching cocktails.
@@ -201,6 +216,21 @@ paths:
           required: false
           schema:
             type: string
+        - name: limit
+          description: The maximum size of the response.
+          in: query
+          required: false
+          schema:
+            type: integer
+            maximum: 40
+            minimum: 1
+        - name: offset
+          description: The offset of the first returned element.
+          in: query
+          required: false
+          schema:
+            type: integer
+            minimum: 0
       responses:
         200:
           description: A list of matching cocktail categories.
@@ -310,6 +340,21 @@ paths:
           required: false
           schema:
             type: integer
+        - name: limit
+          description: The maximum size of the response.
+          in: query
+          required: false
+          schema:
+            type: integer
+            maximum: 40
+            minimum: 1
+        - name: offset
+          description: The offset of the first returned element.
+          in: query
+          required: false
+          schema:
+            type: integer
+            minimum: 0
       responses:
         200:
           description: A list of matching ingredients.
@@ -413,6 +458,21 @@ paths:
           required: true
           schema:
             type: string
+        - name: limit
+          description: The maximum size of the response.
+          in: query
+          required: false
+          schema:
+            type: integer
+            maximum: 40
+            minimum: 1
+        - name: offset
+          description: The offset of the first returned element.
+          in: query
+          required: false
+          schema:
+            type: integer
+            minimum: 0
       responses:
         200:
           description: A list of matching ingredient categories.
@@ -522,6 +582,21 @@ paths:
           required: false
           schema:
             type: integer
+        - name: limit
+          description: The maximum size of the response.
+          in: query
+          required: false
+          schema:
+            type: integer
+            maximum: 40
+            minimum: 1
+        - name: offset
+          description: The offset of the first returned element.
+          in: query
+          required: false
+          schema:
+            type: integer
+            minimum: 0
       responses:
         200:
           description: A list of matching accessories
@@ -625,6 +700,21 @@ paths:
           required: false
           schema:
             type: string
+        - name: limit
+          description: The maximum size of the response.
+          in: query
+          required: false
+          schema:
+            type: integer
+            maximum: 40
+            minimum: 1
+        - name: offset
+          description: The offset of the first returned element.
+          in: query
+          required: false
+          schema:
+            type: integer
+            minimum: 0
       responses:
         200:
           description: A list of matching accessory categories.
@@ -724,6 +814,21 @@ paths:
           required: true
           schema:
             type: string
+        - name: limit
+          description: The maximum size of the response.
+          in: query
+          required: false
+          schema:
+            type: integer
+            maximum: 40
+            minimum: 1
+        - name: offset
+          description: The offset of the first returned element.
+          in: query
+          required: false
+          schema:
+            type: integer
+            minimum: 0
       responses:
         200:
           description: A list of matching glasses.
