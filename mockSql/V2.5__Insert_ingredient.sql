@@ -31,7 +31,7 @@ VALUES (
 	'TODO',
 	'TODO',
 	0,
-	(SELECT id FROM ingredient_category WHERE ingredient_category.name = 'Juice')
+	(SELECT id FROM ingredient_category WHERE ingredient_category.name = 'Orange Juice')
 );
 
 INSERT INTO ingredient (name, image_link, notes, alcohol_percentage, category_id)
