@@ -48,7 +48,7 @@ VALUES (
 
 INSERT INTO cocktail (name, image_link, description, revision_date, notes, category_id, glass_id, ice_cubes)
 VALUES (
-	'Long Island Ice tea',
+	'Long Island Ice Tea',
 	'https://images.unsplash.com/photo-1537401198317-1231361cbd5f?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=5a9460422cdba960d32b584a568f3022&auto=format&fit=crop&w=1050&q=80',
 	'A Long Island Iced Tea is a type of alcoholic mixed drink typically made with vodka, tequila, light rum, triple sec, gin, and a splash of cola, which gives the drink the same amber hue as its namesake.',
 	1540833962,

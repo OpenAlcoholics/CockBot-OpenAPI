@@ -39,3 +39,18 @@ VALUES (
 	'',
 	''
 );
+
+
+INSERT INTO accessory_category (name, description, image_link)
+VALUES (
+	'Mint',
+	'',
+	''
+);
+
+INSERT INTO accessory_category (name, description, image_link)
+VALUES (
+	'Orange',
+	'',
+	''
+);

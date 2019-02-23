@@ -40,7 +40,7 @@ VALUES (
 
 INSERT INTO accessory (name, description, image_link, category_id)
 VALUES (
-	'Mint leaves',
+	'Mint',
 	'...',
 	'',
 	(SELECT id FROM accessory_category WHERE accessory_category.name = 'Herbs')
