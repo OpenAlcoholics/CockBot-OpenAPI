@@ -59,7 +59,7 @@ VALUES (
 	'Tequila',
 	'TODO',
 	'TODO',
-	false
+	true
 );
 
 INSERT INTO ingredient_category (name, description, image_link, is_alcoholic)
