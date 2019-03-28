@@ -334,6 +334,79 @@ paths:
         404:
           $ref: "#/components/responses/NotFound"
 
+  /cocktail/{id}/accessories:
+    parameters:
+      - name: id
+        description: The ID of a cocktail.
+        in: path
+        required: true
+        schema:
+          type: integer
+    get:
+      tags: [Cocktail]
+      summary: Get accessories for a cocktail
+      description: Get all accessories for a cocktail.
+      operationId: getCocktailAccessories
+      responses:
+        200:
+          description: >
+            A list of accessories and their recommended amount (see CocktailAccessory).
+            The order of the list is not specified.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/CocktailAccessory"
+        401:
+          $ref: '#/components/responses/Unauthenticated'
+        404:
+          $ref: "#/components/responses/NotFound"
+    put:
+      tags: [Cocktail]
+      summary: Add an accessory to a cocktail or update its amount if it already exists.
+      description: >
+        Adds an accessory to a cocktail.
+      operationId: addCocktailAccessory
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/CocktailAccessory'
+      responses:
+        204:
+          description: Sucessfully added/updated.
+        401:
+          $ref: '#/components/responses/Unauthenticated'
+        403:
+          $ref: '#/components/responses/Unauthorized'
+        404:
+          $ref: "#/components/responses/NotFound"
+    delete:
+      tags: [Cocktail]
+      description: >
+        Deletes an accessory from a cocktail.
+      operationId: deleteCocktailAccessory
+      parameters:
+        - name: accessoryId
+          description: The ID of an accessory.
+          in: query
+          required: true
+          schema:
+            type: integer
+      responses:
+        204:
+          description: Sucessfully deleted.
+        401:
+          $ref: '#/components/responses/Unauthenticated'
+        403:
+          $ref: '#/components/responses/Unauthorized'
+        404:
+          $ref: "#/components/responses/NotFound"
+
   /cocktail/category:
     post:
       tags: [Cocktail]
