@@ -14,14 +14,10 @@ tags:
     description: Auth related operations
   - name: Cocktail
     description: Operations on cocktails
-  - name: IngredientCategory
-    description: Operations on ingredient categories
   - name: Ingredient
     description: Operations on ingredients
   - name: Accessory
     description: Operations on accessories
-  - name: AccessoryCategory
-    description: Operations on accessory categories
   - name: Glass
     description: Operations on glasses
 
@@ -188,7 +184,7 @@ paths:
 
   /cocktail/category:
     post:
-      tags: [CocktailCategory]
+      tags: [Cocktail]
       summary: Insert a new cocktail category
       operationId: insertCocktailCategory
       requestBody:
@@ -209,7 +205,7 @@ paths:
         403:
           $ref: '#/components/responses/Unauthorized'
     get:
-      tags: [CocktailCategory]
+      tags: [Cocktail]
       summary: Search for a cocktail category
       operationId: searchCocktailCategory
       parameters:
@@ -255,7 +251,7 @@ paths:
         schema:
           type: integer
     get:
-      tags: [CocktailCategory]
+      tags: [Cocktail]
       summary: Get a cocktail category by its ID
       operationId: getCocktailCategory
       responses:
@@ -270,7 +266,7 @@ paths:
         404:
           $ref: "#/components/responses/NotFound"
     put:
-      tags: [CocktailCategory]
+      tags: [Cocktail]
       summary: Update a cocktail category
       operationId: updateCocktailCategory
       requestBody:
@@ -293,7 +289,7 @@ paths:
         404:
           $ref: "#/components/responses/NotFound"
     delete:
-      tags: [CocktailCategory]
+      tags: [Cocktail]
       summary: Delete a cocktail category
       operationId: deleteCocktailCategory
       responses:
@@ -338,8 +334,8 @@ paths:
           required: false
           schema:
             type: string
-        - name: category
-          description: An ingredient category ID.
+        - name: generic
+          description: An generic ingredient ID.
           in: query
           required: false
           schema:
@@ -432,32 +428,32 @@ paths:
         404:
           $ref: "#/components/responses/NotFound"
 
-  /ingredient/category:
+  /ingredient/generic:
     post:
-      tags: [IngredientCategory]
-      summary: Insert a new ingredient category
-      operationId: insertIngredientCategory
+      tags: [Ingredient]
+      summary: Insert a new generic ingredient
+      operationId: insertGenericIngredient
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/IngredientCategory'
+              $ref: '#/components/schemas/GenericIngredient'
       responses:
         201:
-          description: The created ingredient category.
+          description: The created generic ingredient.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/IngredientCategory'
+                $ref: '#/components/schemas/GenericIngredient'
         401:
           $ref: '#/components/responses/Unauthenticated'
         403:
           $ref: '#/components/responses/Unauthorized'
     get:
-      tags: [IngredientCategory]
-      summary: Search for an ingredient category
-      operationId: searchIngredientCategory
+      tags: [Ingredient]
+      summary: Search for a generic ingredient
+      operationId: searchGenericIngredient
       parameters:
         - name: q
           in: query
@@ -483,55 +479,55 @@ paths:
             minimum: 0
       responses:
         200:
-          description: A list of matching ingredient categories.
+          description: A list of matching generic ingredients.
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/IngredientCategory'
+                  $ref: '#/components/schemas/GenericIngredient'
         401:
           $ref: '#/components/responses/Unauthenticated'
-  /ingredient/category/{id}:
+  /ingredient/generic/{id}:
     parameters:
       - name: id
-        description: The ID of an ingredient category.
+        description: The ID of a generic ingredient.
         in: path
         required: true
         schema:
           type: integer
     get:
-      tags: [IngredientCategory]
-      summary: Get an ingredient category by its ID
-      operationId: getIngredientCategory
+      tags: [Ingredient]
+      summary: Get a generic ingredient by its ID
+      operationId: getGenericIngredient
       responses:
         200:
-          description: The requested ingredient category.
+          description: The requested generic ingredient.
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/IngredientCategory"
+                $ref: "#/components/schemas/GenericIngredient"
         401:
           $ref: '#/components/responses/Unauthenticated'
         404:
           $ref: "#/components/responses/NotFound"
     put:
-      tags: [IngredientCategory]
-      summary: Update an ingredient category
-      operationId: updateIngredientCategory
+      tags: [Ingredient]
+      summary: Update a generic ingredient
+      operationId: updateGenericIngredient
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/IngredientCategory'
+              $ref: '#/components/schemas/GenericIngredient'
       responses:
         200:
-          description: The updated ingredient category.
+          description: The updated generic ingredient.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/IngredientCategory'
+                $ref: '#/components/schemas/GenericIngredient'
         401:
           $ref: '#/components/responses/Unauthenticated'
         403:
@@ -539,9 +535,12 @@ paths:
         404:
           $ref: "#/components/responses/NotFound"
     delete:
-      tags: [IngredientCategory]
-      summary: Delete an ingredient category
-      operationId: deleteIngredientCategory
+      tags: [Ingredient]
+      summary: Delete a generic ingredient
+      description: >
+        Deletes a generic ingredient and all concrete ingredients associated with it.
+        Warning: This operation will also delete all cocktails using the deleted generic ingredient.
+      operationId: deleteGenericIngredient
       responses:
         204:
           description: Sucessfully deleted.
@@ -584,12 +583,6 @@ paths:
           required: false
           schema:
             type: string
-        - name: category
-          description: An accessory category ID.
-          in: query
-          required: false
-          schema:
-            type: integer
         - name: limit
           description: The maximum size of the response.
           in: query
@@ -675,122 +668,6 @@ paths:
           $ref: '#/components/responses/Unauthenticated'
         403:
           $ref: '#/components/responses/Unauthorized'
-        404:
-          $ref: "#/components/responses/NotFound"
-
-  /accessory/category:
-    post:
-      tags: [AccessoryCategory]
-      summary: Insert a new accessory category
-      operationId: insertAccessoryCategory
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/AccessoryCategory'
-      responses:
-        201:
-          description: The created accessory category.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AccessoryCategory'
-        401:
-          $ref: '#/components/responses/Unauthenticated'
-        403:
-          $ref: '#/components/responses/Unauthorized'
-    get:
-      tags: [AccessoryCategory]
-      summary: Search for an accessory category
-      operationId: searchAccessoryCategory
-      parameters:
-        - name: q
-          in: query
-          required: false
-          schema:
-            type: string
-        - name: limit
-          description: The maximum size of the response.
-          in: query
-          required: false
-          schema:
-            type: integer
-            default: 40
-            maximum: 40
-            minimum: 1
-        - name: offset
-          description: The offset of the first returned element.
-          in: query
-          required: false
-          schema:
-            type: integer
-            default: 0
-            minimum: 0
-      responses:
-        200:
-          description: A list of matching accessory categories.
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/AccessoryCategory'
-        401:
-          $ref: '#/components/responses/Unauthenticated'
-  /accessory/category/{id}:
-    parameters:
-      - name: id
-        description: The ID of an accessory category.
-        in: path
-        required: true
-        schema:
-          type: integer
-    get:
-      tags: [AccessoryCategory]
-      summary: Get an accessory category by its ID
-      operationId: getAccessoryCategory
-      responses:
-        200:
-          description: The requested accessory category.
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/AccessoryCategory"
-        401:
-          $ref: '#/components/responses/Unauthenticated'
-        404:
-          $ref: "#/components/responses/NotFound"
-    put:
-      tags: [AccessoryCategory]
-      summary: Update an accessory category
-      operationId: updateAccessoryCategory
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/AccessoryCategory'
-      responses:
-        200:
-          description: The updated accessory category.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AccessoryCategory'
-        401:
-          $ref: '#/components/responses/Unauthenticated'
-        403:
-          $ref: '#/components/responses/Unauthorized'
-        404:
-          $ref: "#/components/responses/NotFound"
-    delete:
-      tags: [AccessoryCategory]
-      summary: Delete an accessory category
-      operationId: deleteAccessoryCategory
-      responses:
-        204:
-          description: Sucessfully deleted.
         404:
           $ref: "#/components/responses/NotFound"
 
@@ -948,14 +825,13 @@ components:
           description: URL to the project website.
           example: https://github.com/OpenAlcoholics/CocktailParty
           type: string
+
     Cocktail:
-      description: Information about a cocktail and its recipe.
+      description: Information about a cocktail, not including accessories and ingredients.
       type: object
       required:
         - name
         - description
-        - ingredients
-        - accessories
         - category
         - glass
       properties:
@@ -971,20 +847,6 @@ components:
           description: A description of the cocktail.
           example: Resembles a beautiful sunrise
           type: string
-        ingredients:
-          description: >
-            A list of lists of ingredients (see CocktailIngredient). If a list contains multiple items,
-            they can be poured simultaneously.
-          type: array
-          items:
-            type: array
-            items:
-              $ref: "#/components/schemas/CocktailIngredient"
-        accessories:
-          description: A list of accessories that might be applied to the cocktail.
-          type: array
-          items:
-            $ref: "#/components/schemas/CocktailAccessory"
         category:
           $ref: "#/components/schemas/CocktailCategory"
         glass:
@@ -1026,16 +888,14 @@ components:
           type: string
 
     CocktailIngredient:
-      description: The relation of an ingredient to a cocktail.
+      description: The relation of an generic ingredient to a cocktail.
       type: object
       required:
-        - ingredientCategoryId
+        - genericIngredient
         - share
       properties:
-        ingredientCategoryId:
-          description: The ingredient category ID.
-          example: 123
-          type: integer
+        genericIngredient:
+          $ref: "#/components/schemas/GenericIngredient"
         share:
           description: The share (in percent) of the ingredient in a cocktail.
           example: 40
@@ -1044,12 +904,12 @@ components:
           minimum: 0
           maximum: 100
     Ingredient:
-      description: A concrete liquid ingredient of a cocktail.
+      description: A concrete liquid ingredient of a cocktail (for example Three Sixty Vodka, Bombay Sapphire, etc.)
       type: object
       required:
         - name
         - alcoholPercentage
-        - category
+        - generic
       properties:
         id:
           description: The ingredient ID.
@@ -1068,37 +928,37 @@ components:
           example: 38
           type: integer
           format: int32
-        category:
-          "$ref": "#/components/schemas/IngredientCategory"
+        generic:
+          "$ref": "#/components/schemas/GenericIngredient"
         notes:
           description: Arbitrary notes on the ingredient.
           example: This is a note on an ingredient
           type: string
-    IngredientCategory:
-      description: A cocktail ingredient category (for example Gin, Vodka, Orange Juice, etc.).
+    GenericIngredient:
+      description: A generic cocktail ingredient (for example Gin, Vodka, Orange Juice, etc.).
       type: object
       required:
         - name
         - alcoholic
       properties:
         id:
-          description: The category ID.
+          description: The generic ingredient ID.
           example: 123
           type: integer
         name:
-          description: The name of the category.
+          description: The name of the ingredient.
           example: Tequila
           type: string
         description:
-          description: A description of the category.
+          description: A description of the ingredient.
           example: It's tequila.
           type: string
         alcoholic:
-          description: Whether ingredients of this category contain alcohol.
+          description: Whether ingredients of this type contain alcohol.
           example: true
           type: boolean
         imageLink:
-          description: A link to an image representing the category.
+          description: A link to an image representing the ingredient.
           example: https://exampleimage.link
           type: string
 
@@ -1106,11 +966,11 @@ components:
       description: The relation of an accessory to a cocktail.
       type: object
       required:
-        - accessoryCategoryId
+        - accessoryId
         - pieces
       properties:
-        accessoryCategoryId:
-          description: The accessory category ID.
+        accessoryId:
+          description: The accessory ID.
           example: 123
           type: integer
         pieces:
@@ -1125,7 +985,6 @@ components:
       required:
         - name
         - description
-        - category
       properties:
         id:
           description: The accessory ID.
@@ -1143,34 +1002,7 @@ components:
           description: A link to an image of the accessory.
           example: https://exampleimage.link
           type: string
-          nullable: true
-        category:
-          "$ref": "#/components/schemas/AccessoryCategory"
-    AccessoryCategory:
-      description: An accessory category.
-      type: object
-      required:
-        - name
-        - description
-        - alcoholic
-      properties:
-        id:
-          description: The category ID.
-          example: 123
-          type: integer
-        name:
-          description: The name of the category.
-          example: Inedibles
-          type: string
-        description:
-          description: A description of the category.
-          example: Don't put it in your mouth.
-          type: string
-        imageLink:
-          description: A link to an image representing the category.
-          example: https://exampleimage.link
-          type: string
-          nullable: true
+
     Glass:
       description: A type of cocktail glass.
       type: object
