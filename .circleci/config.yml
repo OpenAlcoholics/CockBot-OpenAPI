@@ -1,20 +1,51 @@
 version: 2
 
 jobs:
-  build:
-    docker:
-      - image: boxfuse/flyway:5.1.4
-    steps:
+    migrate:
+        docker:
+            - image: boxfuse/flyway:5.1.4
+        steps:
+            - checkout
+            - run:
+                name: Replace password in .circleci/flyway.conf
+                command: sed -i -e "s/{{password}}/${OPENCOCKTAIL_CIRCLECI_PASSWORD}/g" .circleci/flyway.conf
+            - run:
+                name: Replace base url in .circleci/flyway.conf
+                command: sed -i -e "s/{{base_url}}/${OPENCOCKTAIL_CIRCLECI_BASE_URL}/g" .circleci/flyway.conf
+            - run:
+                name: Execute migration
+                command: flyway -X -configFiles=.circleci/flyway.conf migrate
+    build_docs:
+        docker:
+            - image: openapitools/openapi-generator-cli:v3.3.1
+        steps:
+            - checkout
+            - run: java -jar /opt/openapi-generator-cli/openapi-generator-cli.jar generate -i OpenCocktail.yaml -g html -o docs
+            - store_artifacts:
+                path: docs
+                destination: docs
+
+    markdown_lint:
+        docker:
+        - image: 06kellyjac/markdownlint-cli:0.13.0-alpine
+        steps:
         - checkout
-        - run:
-            name: Replace password in .circleci/flyway.conf
-            command: sed -i -e "s/{{password}}/${OPENCOCKTAIL_CIRCLECI_PASSWORD}/g" .circleci/flyway.conf
-        - run:
-            name: Replace password in .circleci/flyway.conf
-            command: sed -i -e "s/{{base_url}}/${OPENCOCKTAIL_CIRCLECI_BASE_URL}/g" .circleci/flyway.conf
-        - run:
-            name: Clean database (only for testing)
-            command: flyway -X -configFiles=.circleci/flyway.conf clean
-        - run:
-            name: Execute migration
-            command: flyway -X -configFiles=.circleci/flyway.conf  migrate
+        - run: markdownlint README.md
+
+workflows:
+  version: 2
+  do_everything:
+    jobs:
+        - markdown_lint
+        - migrate:
+            filters:
+                branches:
+                    only:
+                        - master
+                        - develop
+        - build_docs:
+            filters:
+                branches:
+                    only:
+                        - master
+                        - develop

@@ -1,4 +1,4 @@
-INSERT INTO glasses (name, estimated_size, image_link)
+INSERT INTO glass (name, estimated_size, image_link)
 VALUES (
 	'Highball',
 	400,
