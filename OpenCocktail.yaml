@@ -182,6 +182,158 @@ paths:
         404:
           $ref: "#/components/responses/NotFound"
 
+  /cocktail/{id}/recipe:
+    parameters:
+      - name: id
+        description: The ID of a cocktail.
+        in: path
+        required: true
+        schema:
+          type: integer
+    get:
+      tags: [Cocktail]
+      summary: Get full recipe for a cocktail
+      description: Get the generic ingredients and their shares for a cocktail.
+      operationId: getRecipe
+      responses:
+        200:
+          description: >
+            A list of lists of ingredients (see CocktailIngredient).
+            If a sublist contains multiple items, they can be poured simultaneously.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: array
+                  items:
+                    $ref: "#/components/schemas/CocktailIngredient"
+        401:
+          $ref: '#/components/responses/Unauthenticated'
+        404:
+          $ref: "#/components/responses/NotFound"
+    post:
+      tags: [Cocktail]
+      summary: Append a recipe step to a cocktail recipe
+      description: >
+        Appends a sublist list of generic ingredients which can be poured simultaneously to the cocktail's ingredients.
+      operationId: appendRecipeStep
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/CocktailIngredient'
+      responses:
+        204:
+          description: Sucessfully added.
+        401:
+          $ref: '#/components/responses/Unauthenticated'
+        403:
+          $ref: '#/components/responses/Unauthorized'
+        404:
+          $ref: "#/components/responses/NotFound"
+  /cocktail/{id}/recipe/{index}:
+    parameters:
+      - name: id
+        description: The ID of a cocktail.
+        in: path
+        required: true
+        schema:
+          type: integer
+      - name: index
+        description: The index of a sublist/step.
+        in: path
+        required: true
+        schema:
+          type: integer
+          minimum: 0
+    get:
+      tags: [Cocktail]
+      summary: Get a single recipe step
+      description: >
+        Get the ingredients and their shares of a specific recipe step for a cocktail.
+      operationId: getRecipeStep
+      responses:
+        200:
+          description: >
+            A list of ingredients and their shares (see CocktailIngredient).
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/CocktailIngredient"
+        401:
+          $ref: '#/components/responses/Unauthenticated'
+        404:
+          $ref: "#/components/responses/NotFound"
+    delete:
+      tags: [Cocktail]
+      summary: Delete a recipe step for a cocktail
+      operationId: deleteRecipeStep
+      responses:
+        204:
+          description: Sucessfully deleted.
+        401:
+          $ref: '#/components/responses/Unauthenticated'
+        403:
+          $ref: '#/components/responses/Unauthorized'
+        404:
+          $ref: "#/components/responses/NotFound"
+    post:
+      tags: [Cocktail]
+      summary: Add a recipe step to a cocktail
+      description: >
+        Add a sublist list of generic ingredients which can be poured simultaneously to the cocktail's ingredients.
+        If a recipe step already existed at the specified index, the old step and all subsequent steps will be shifted
+        "to the right".
+        A similar operation exists to append the step at the end of the recipe, which is accessible by omitting
+        the recipe step index.
+      operationId: addRecipeStep
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/CocktailIngredient'
+      responses:
+        204:
+          description: Sucessfully added.
+        401:
+          $ref: '#/components/responses/Unauthenticated'
+        403:
+          $ref: '#/components/responses/Unauthorized'
+        404:
+          $ref: "#/components/responses/NotFound"
+    put:
+      tags: [Cocktail]
+      summary: Update a recipe step for a cocktail
+      description: >
+        Updates an existing recipe step by replacing it. A step must exist at the specified index.
+      operationId: updateRecipeStep
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/CocktailIngredient'
+      responses:
+        204:
+          description: Sucessfully replaced.
+        401:
+          $ref: '#/components/responses/Unauthenticated'
+        403:
+          $ref: '#/components/responses/Unauthorized'
+        404:
+          $ref: "#/components/responses/NotFound"
+
   /cocktail/category:
     post:
       tags: [Cocktail]
@@ -891,11 +1043,13 @@ components:
       description: The relation of an generic ingredient to a cocktail.
       type: object
       required:
-        - genericIngredient
+        - genericIngredientId
         - share
       properties:
-        genericIngredient:
-          $ref: "#/components/schemas/GenericIngredient"
+        genericIngredientId:
+          description: The generic ingredient ID.
+          example: 123
+          type: integer
         share:
           description: The share (in percent) of the ingredient in a cocktail.
           example: 40
