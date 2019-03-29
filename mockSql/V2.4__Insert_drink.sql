@@ -1,4 +1,4 @@
-INSERT INTO cocktail (name, image_link, description, revision_date, notes, category_id, glass_id, ice_cubes)
+INSERT INTO cocktail (name, image_link, description, revision_date, notes, generic_id, glass_id, ice_cubes)
 VALUES (
 	'Gin & Tonic',
 	'https://www.thespruceeats.com/thmb/9g5q0ChNcHs5IjThGwciEsa5d0Y=/960x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/gin-tonic-5a8f334b8e1b6e0036a9631d.jpg',
@@ -10,7 +10,7 @@ VALUES (
 	true
 );
 
-INSERT INTO cocktail (name, image_link, description, revision_date, notes, category_id, glass_id, ice_cubes)
+INSERT INTO cocktail (name, image_link, description, revision_date, notes, generic_id, glass_id, ice_cubes)
 VALUES (
 	'Vodka-O',
 	'https://example.com/vodkaO.jpg',
@@ -22,7 +22,7 @@ VALUES (
 	true
 );
 
-INSERT INTO cocktail (name, image_link, description, revision_date, notes, category_id, glass_id, ice_cubes)
+INSERT INTO cocktail (name, image_link, description, revision_date, notes, generic_id, glass_id, ice_cubes)
 VALUES (
 	'Virgin Vodka-O',
 	'https://example.com/o.jpg',

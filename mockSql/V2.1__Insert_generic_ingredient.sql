@@ -9,7 +9,7 @@ VALUES (
 INSERT INTO ingredient_category (name, description, image_link, is_alcoholic)
 VALUES (
 	'Gin',
-	'Gin is liquor which derives its predominant flavour from juniper berry (Juniperus communis). Gin is one of the broadest category of spirits, all of various origins, styles, and flavour profiles that revolve around juniper as a common ingredient.',
+	'Gin is liquor which derives its predominant flavour from juniper berry (Juniperus communis). Gin is one of the broadest generic of spirits, all of various origins, styles, and flavour profiles that revolve around juniper as a common ingredient.',
 	'https://cdn.pixabay.com/photo/2017/05/10/08/05/gin-2300126_960_720.png',
 	true
 );
