@@ -21,7 +21,7 @@ VALUES (
 	'SKYY vodka',
 	'http://campariamerica.com/wp-content/uploads/2016/03/SKYY_Infusions_HoneycrispApple_TropicalMango.jpg',
 	'A pretty solid vodka',
-	0,
+	40,
 	(SELECT id FROM generic_ingredient WHERE generic_ingredient.name = 'Vodka')
 );
 
