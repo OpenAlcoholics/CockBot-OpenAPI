@@ -22,7 +22,7 @@ VALUES (
 	'http://campariamerica.com/wp-content/uploads/2016/03/SKYY_Infusions_HoneycrispApple_TropicalMango.jpg',
 	'A pretty solid vodka',
 	0,
-	(SELECT id FROM generic_ingredient WHERE generic_ingredient.name = 'Tonic Water')
+	(SELECT id FROM generic_ingredient WHERE generic_ingredient.name = 'Vodka')
 );
 
 INSERT INTO ingredient (name, image_link, notes, alcohol_percentage, generic_id)
