@@ -18,9 +18,9 @@ VALUES (
 
 INSERT INTO ingredient (name, image_link, notes, alcohol_percentage, generic_id)
 VALUES (
-	'Cucumber slice',
-	'https://c1.staticflickr.com/4/3234/2738586453_f23bc8244e_b.jpg',
-	'Slice of a cucumber',
+	'SKYY vodka',
+	'http://campariamerica.com/wp-content/uploads/2016/03/SKYY_Infusions_HoneycrispApple_TropicalMango.jpg',
+	'A pretty solid vodka',
 	0,
 	(SELECT id FROM generic_ingredient WHERE generic_ingredient.name = 'Tonic Water')
 );
@@ -38,7 +38,7 @@ INSERT INTO ingredient (name, image_link, notes, alcohol_percentage, generic_id)
 VALUES (
 	'Three Sixty Vodka',
 	null,
-	'TODO',
+	'Good vokda',
 	37,
 	(SELECT id FROM generic_ingredient WHERE generic_ingredient.name = 'Vodka')
 );
