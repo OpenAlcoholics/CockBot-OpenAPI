@@ -28,7 +28,7 @@ VALUES (
 INSERT INTO ingredient (name, image_link, notes, alcohol_percentage, generic_id)
 VALUES (
 	'Orange Juice',
-	'TODO',
+	null,
 	'TODO',
 	0,
 	(SELECT id FROM generic_ingredient WHERE generic_ingredient.name = 'Orange Juice')
@@ -37,7 +37,7 @@ VALUES (
 INSERT INTO ingredient (name, image_link, notes, alcohol_percentage, generic_id)
 VALUES (
 	'Three Sixty Vodka',
-	'TODO',
+	null,
 	'TODO',
 	37,
 	(SELECT id FROM generic_ingredient WHERE generic_ingredient.name = 'Vodka')
