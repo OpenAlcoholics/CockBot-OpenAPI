@@ -38,7 +38,7 @@ INSERT INTO ingredient (name, image_link, notes, alcohol_percentage, generic_id)
 VALUES (
 	'Three Sixty Vodka',
 	null,
-	'Good vokda',
+	'Vodka for almost every day of the year',
 	37,
 	(SELECT id FROM generic_ingredient WHERE generic_ingredient.name = 'Vodka')
 );
