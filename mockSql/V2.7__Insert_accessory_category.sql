@@ -8,6 +8,49 @@ VALUES (
 INSERT INTO accessory_category (name, description, image_link)
 VALUES (
 	'Lemon',
-	'Slice of a cucumber',
+	'',
+	''
+);
+
+INSERT INTO accessory_category (name, description, image_link)
+VALUES (
+	'Lime',
+	'',
+	''
+);
+
+INSERT INTO accessory_category (name, description, image_link)
+VALUES (
+	'Citrus',
+	'',
+	''
+);
+
+INSERT INTO accessory_category (name, description, image_link)
+VALUES (
+	'Sugar',
+	'',
+	''
+);
+
+INSERT INTO accessory_category (name, description, image_link)
+VALUES (
+	'Herbs',
+	'',
+	''
+);
+
+
+INSERT INTO accessory_category (name, description, image_link)
+VALUES (
+	'Mint',
+	'',
+	''
+);
+
+INSERT INTO accessory_category (name, description, image_link)
+VALUES (
+	'Orange',
+	'',
 	''
 );
